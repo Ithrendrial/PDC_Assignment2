@@ -19,15 +19,4 @@ public class Data {
             plants.add(0);
         }
     }
-    
-    public void testGit() {
-        System.out.println("This is me testing git");
-    }
-    
-    public void davisIsCool()
-    {
-        System.out.println("Rachel is cool but not PB");
-    }
-    
-    //HI
 }
