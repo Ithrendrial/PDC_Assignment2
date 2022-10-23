@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,10 @@ public class Data {
         for(int i = 0; i < 9; i++){
             plants.add(0);
         }
+    }
+    
+    public void testGit() {
+        System.out.println("This is me testing git");
     }
 
 }

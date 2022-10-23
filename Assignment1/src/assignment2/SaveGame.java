@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import static Assignment1.GameCui.ANSI_RED;
+import static assignment2.GameCui.ANSI_RED;
 
 public class SaveGame {
     

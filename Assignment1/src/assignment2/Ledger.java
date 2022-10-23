@@ -1,6 +1,6 @@
-package Assignment1;
+package assignment2;
 
-import static Assignment1.GameCui.ANSI_RED;
+import static assignment2.GameCui.ANSI_RED;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;

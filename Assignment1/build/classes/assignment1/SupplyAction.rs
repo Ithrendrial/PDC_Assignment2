@@ -1,2 +1,0 @@
-Assignment1.SupplyAction
-pdc_assignment1.SupplyAction

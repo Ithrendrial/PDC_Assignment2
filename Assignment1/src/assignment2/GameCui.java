@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment2;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
