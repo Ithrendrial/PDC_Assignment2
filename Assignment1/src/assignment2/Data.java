@@ -23,5 +23,9 @@ public class Data {
     public void testGit() {
         System.out.println("This is me testing git");
     }
-
+    
+    public void davisIsCool()
+    {
+        System.out.println("Rachel is cool but not PB");
+    }
 }
