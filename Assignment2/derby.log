@@ -1,7 +1,7 @@
-Mon Oct 24 22:15:20 NZDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Mon Oct 24 23:12:15 NZDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Oct 24 22:15:28 NZDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-0946-69c3-fffff5b77d03 
+Mon Oct 24 23:12:15 NZDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-097a-849b-fffff5b77d03 
 on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\The Plant Shop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/optim/OneDrive/Documents/GitHub/PDC_Assignment2/Assignment2/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 24 23:12:21 NZDT 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Mon Oct 24 23:12:21 NZDT 2022:
+Shutting down instance a816c00e-0184-097a-849b-fffff5b77d03 on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\The Plant Shop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+----------------------------------------------------------------
