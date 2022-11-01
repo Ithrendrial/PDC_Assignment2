@@ -1,20 +1,14 @@
-Tue Nov 01 17:59:26 NZDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Tue Nov 01 18:27:17 NZDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Nov 01 17:59:26 NZDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-318f-0183-fffff5b77d03 
-on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\PlantShop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/optim/OneDrive/Documents/GitHub/PDC_Assignment2/Assignment2/db-derby-10.14.2.0-bin/lib/derby.jar
+Tue Nov 01 18:27:17 NZDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-31a8-7ebc-fffff5b77d03 
+on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\ThePlantShop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/optim/OneDrive/Documents/GitHub/PDC_Assignment2/Assignment2/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=17.0.2+8-LTS-86
-user.dir=C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\db-derby-10.14.2.0-bin
+user.dir=C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Nov 01 18:00:26 NZDT 2022: Shutting down Derby engine
-----------------------------------------------------------------
-Tue Nov 01 18:00:26 NZDT 2022:
-Shutting down instance a816c00e-0184-318f-0183-fffff5b77d03 on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\PlantShop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
-----------------------------------------------------------------
