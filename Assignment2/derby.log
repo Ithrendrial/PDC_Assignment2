@@ -21,16 +21,16 @@ Caused by: ERROR XJ040: Failed to start database 'ThePlantShop' with class loade
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	... 17 more
-Caused by: ERROR XSDB6: Another instance of Derby may have already booted the database C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\ThePlantShop.
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.privGetJBMSLockOnDB(Unknown Source)
-	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.run(Unknown Source)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
-	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.getJBMSLockOnDB(Unknown Source)
-	at org.apache.derby.impl.store.raw.data.BaseDataFileFactory.boot(Unknown Source)
-	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(Unknown Source)
-	at org.apache.derby.impl.services.monitor.TopService.bootModule(Unknown Source)
+Caused by: ERROR XSDB6: Another inst----------------------------------------------------------------
+Tue Nov 01 21:57:23 NZDT 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Nov 01 21:57:23 NZDT 2022:
+Shutting down instance 0ddd00a9-0184-321b-d0b8-fffff5b77d03 on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\ThePlantShop with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+----------------------------------------------------------------
+Tue Nov 01 21:57:23 NZDT 2022:
+Shutting down instance a816c00e-0184-321b-d0b8-fffff5b77d03 on database directory C:\Users\optim\OneDrive\Documents\GitHub\PDC_Assignment2\Assignment2\2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+----------------------------------------------------------------
+r.TopService.bootModule(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startModule(Unknown Source)
 	at org.apache.derby.impl.services.monitor.FileMonitor.startModule(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.bootServiceModule(Unknown Source)
