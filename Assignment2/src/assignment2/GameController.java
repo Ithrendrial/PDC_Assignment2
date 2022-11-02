@@ -16,6 +16,7 @@ public class GameController implements ActionListener{
     public GameView view;
     public GameModel model;
     private JFrame frame;
+    private boolean origin;
     
         public GameController(GameView view, GameModel model, JFrame frame){
         this.view = view;
@@ -27,18 +28,32 @@ public class GameController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         String command = e.getActionCommand();
-        Object source = e.getSource();
         
         switch(command){
             case "PLAY":
+                view.play();
                 break;
-            case "HOW TO PLAY":
+            case "mainRules":
+                origin = true;
                 view.rules();
                 break;
             case "LEADERBOARD":
+                view.leaderboard();
                 break;
             case "BACK":
+                if (origin)
+                    view.mainMenu();
+                else
+                    view.play();
+                break;
+            case "playRules":
+                origin = false;
+                view.rules();
+                break;
+            case "MAIN MENU":
                 view.mainMenu();
+                break;
+            case "SAVE":
                 break;
             default:
                 break;
