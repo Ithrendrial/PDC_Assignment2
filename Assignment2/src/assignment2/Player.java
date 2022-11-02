@@ -16,7 +16,7 @@ public class Player
     public Player()
     {
         saveFile = 0;
-        money = 0.00;
+        money = 100.00;
         numOfPlants = 0;
         numOfWeeks = 0;
         numOfGrowLight = 0;
