@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
@@ -22,6 +23,11 @@ import javax.swing.border.EmptyBorder;
  * @author rcox2
  */
 public class GameView extends JPanel implements Observer {
+    //Login Screen
+    private JButton login;
+    private JLabel name;
+    private JTextField enterName;
+    
     //Main Menu parts
     private JButton play;
     private JButton howtoMain;
@@ -49,11 +55,16 @@ public class GameView extends JPanel implements Observer {
     
     public GameView(){
         this.components();
-        this.mainMenu();
+        this.enterName();
     }
     
     //initiate components
     public void components(){ 
+        //Instantiate Login Menu
+        login = new JButton("GO");
+        name = new JLabel("Enter your name: ");
+        enterName = new JTextField();
+        
         //Instantiate Main Menu 
         play = new JButton("PLAY");
         howtoMain = new JButton("HOW TO PLAY");
@@ -94,6 +105,30 @@ public class GameView extends JPanel implements Observer {
         
         //Instantiate Leaderboard
         scoresList = new JLabel();
+    }
+    
+    public void enterName()
+    {
+        JPanel entrName;
+        
+        //Add Button
+        entrName = new JPanel();
+        GridLayout layout = new GridLayout(1,3);
+        layout.setHgap(20);
+        
+        entrName.setBorder(new EmptyBorder(250, 5, 5, 5));
+        entrName.setLayout(layout);
+        entrName.setBackground(Color.decode("#6eacdf"));
+        
+        entrName.add(name);
+        entrName.add(enterName);
+        entrName.add(login);
+        
+        super.removeAll();
+        super.setBackground(Color.decode("#6eacdf"));
+        super.add(entrName);
+        super.revalidate();
+        super.repaint();
     }
         
     public void mainMenu() {
@@ -296,6 +331,9 @@ public class GameView extends JPanel implements Observer {
     }
     
     public void addActionListener(ActionListener listener){
+        //Enter Name Menu
+        login.addActionListener(listener);
+        
         //Main Menu Actions
         play.addActionListener(listener);
         howtoMain.addActionListener(listener);

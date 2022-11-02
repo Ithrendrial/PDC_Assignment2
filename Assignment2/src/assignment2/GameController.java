@@ -30,6 +30,9 @@ public class GameController implements ActionListener{
         String command = e.getActionCommand();
         
         switch(command){
+            case "GO":
+                view.mainMenu();
+                break;
             case "PLAY":
                 view.play();
                 break;
