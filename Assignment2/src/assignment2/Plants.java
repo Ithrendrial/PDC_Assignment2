@@ -36,4 +36,56 @@ public class Plants
         tier9 = 9;
         tier10 = 10;
     }
+
+    public int getPlantId() {
+        return plantId;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public double getPriceWeight() {
+        return priceWeight;
+    }
+
+    public int getTier1() {
+        return tier1;
+    }
+
+    public int getTier2() {
+        return tier2;
+    }
+
+    public int getTier3() {
+        return tier3;
+    }
+
+    public int getTier4() {
+        return tier4;
+    }
+
+    public int getTier5() {
+        return tier5;
+    }
+
+    public int getTier6() {
+        return tier6;
+    }
+
+    public int getTier7() {
+        return tier7;
+    }
+
+    public int getTier8() {
+        return tier8;
+    }
+
+    public int getTier9() {
+        return tier9;
+    }
+
+    public int getTier10() {
+        return tier10;
+    }
 }

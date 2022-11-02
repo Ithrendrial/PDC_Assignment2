@@ -30,6 +30,11 @@ public class GameDatabase
             if(!checkTable(tableName))
             {
                 statement.executeUpdate("CREATE TABLE" + tableName + " (PLAND_ID INTEGER NOT NULL, SPECIES CHAR(100) NOT NULL, PRICEWEIGHT INTEGER NOT NULL, TIER1 INTEGER NOT NULL, TIER2 INTEGER NOT NULL, TIER3 INTEGER NOT NULL, TIER4 INTEGER NOT NULL, TIER5 INTEGER NOT NULL, TIER6 INTEGER NOT NULL, TIER7 INTEGER NOT NULL, TIER8 INTEGER NOT NULL, TIER9 INTEGER NOT NULL, TIER10 INTEGER NOT NULL, PRIMARY KEY (PLAND_ID)");
+                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (1, 'Monstera Deliciosa', 500, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
+                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (2, 'Adiantum Fragrans', 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
+                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (3, 'Alocasia Azlanii', 300, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
+                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (4, 'Dracaena Trifasciata', 5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
+                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (5, 'Calathea Leitzei', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
             }
             statement.close();
         }

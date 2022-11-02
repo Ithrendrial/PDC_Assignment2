@@ -4,7 +4,7 @@ package assignment2;
  *
  * @author Davis
  */
-public class Player 
+public class LeaderBoard 
 {
     int saveFile;
     double money;
@@ -13,7 +13,7 @@ public class Player
     int numOfGrowLight;
     int numOfFertiliser;
     
-    public Player()
+    public LeaderBoard()
     {
         saveFile = 0;
         money = 100.00;
