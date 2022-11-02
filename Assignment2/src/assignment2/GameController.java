@@ -21,6 +21,9 @@ public class GameController implements ActionListener{
         public GameController(GameView view, GameModel model, JFrame frame){
         this.view = view;
         this.frame = frame;
+        this.model = model;
+        
+        this.view.addActionListener(this);
         
         this.view.addActionListener(this);
     }
@@ -35,6 +38,7 @@ public class GameController implements ActionListener{
                 break;
             case "PLAY":
                 view.play();
+                //model.test();
                 break;
             case "mainRules":
                 origin = true;

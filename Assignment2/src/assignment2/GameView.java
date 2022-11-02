@@ -17,11 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
-/**
- *
- * @author rcox2
- */
 public class GameView extends JPanel implements Observer {
     //Login Screen
     private JButton login;
@@ -29,6 +24,7 @@ public class GameView extends JPanel implements Observer {
     private JTextField enterName;
     
     //Main Menu parts
+    private Font font;
     private JButton play;
     private JButton howtoMain;
     private JButton leaderboard;
@@ -40,6 +36,15 @@ public class GameView extends JPanel implements Observer {
     private JButton buy;
     private JButton select;
     private JLabel bank;
+    private JLabel week;
+    private JLabel name;
+    private JLabel tiers;
+    private JLabel ferts;
+    private JLabel lights;
+    private JButton sell;
+    private JButton prop;
+    private JButton fertilise;
+    private JButton giveLight;
     private JButton howtoPlay;
     private JButton save;
     private JButton main;
@@ -58,6 +63,7 @@ public class GameView extends JPanel implements Observer {
         this.enterName();
     }
     
+    
     //initiate components
     public void components(){ 
         //Instantiate Login Menu
@@ -66,6 +72,7 @@ public class GameView extends JPanel implements Observer {
         enterName = new JTextField();
         
         //Instantiate Main Menu 
+        font = new Font("Courier new", Font.BOLD, 14);
         play = new JButton("PLAY");
         howtoMain = new JButton("HOW TO PLAY");
         leaderboard = new JButton("LEADERBOARD");
@@ -91,12 +98,37 @@ public class GameView extends JPanel implements Observer {
         buy = new JButton("BUY");
         select = new JButton("SELECT");
         bank = new JLabel();
+        week = new JLabel();
         bank.setText("Bank: $1,000,000");
-        bank.setFont(new Font("Courier new", Font.BOLD, 14));
+        week.setText("Week: 00");
+        week.setFont(font);
+        bank.setFont(font);
+        name = new JLabel("<html><u>You have selected:</u><b> Plant Name");
+        name.setFont(font);
+        tiers = new JLabel("""
+                           <html><br><br>You have:<br>
+                           n plants in tier 1,<br> 
+                           n plants in tier 2, <br> 
+                           n plants in tier 3, <br> 
+                           n plants in tier 4, <br> 
+                           n plants in tier 5, <br> 
+                           n plants in tier 6, <br> 
+                           n plants in tier 7, <br> 
+                           n plants in tier 8, <br> 
+                           n plants in tier 9, <br> 
+                           and n plants in tier 10<br><br></html>""");
+        tiers.setFont(font);
+        ferts = new JLabel("You have n bag(s) of fertiliser.");
+        ferts.setFont(font);
+        lights = new JLabel("You have n growlights.");
+        lights.setFont(font);
+        sell = new JButton("SELL");
+        prop = new JButton("PROPAGATE");
+        fertilise = new JButton("FERTILISE");
+        giveLight = new JButton("GIVE LIGHT");
         main = new JButton("MAIN MENU");
         howtoPlay = new JButton("HOW TO PLAY");
         save = new JButton("SAVE");
-        
         
         //Instantiate Rules
         back = new JButton("BACK");
@@ -131,6 +163,7 @@ public class GameView extends JPanel implements Observer {
         super.repaint();
     }
         
+    
     public void mainMenu() {
         JPanel title;
         JPanel buttons;
@@ -165,6 +198,7 @@ public class GameView extends JPanel implements Observer {
         super.repaint();
     }
     
+    
     public void play() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -172,6 +206,8 @@ public class GameView extends JPanel implements Observer {
         JPanel header;
         JPanel combos;
         JPanel actions;
+        JPanel info;
+        JPanel actionButtons;
         JPanel buttons;
         
         //Add image//
@@ -199,9 +235,36 @@ public class GameView extends JPanel implements Observer {
         
         //Actions
         actions = new JPanel();
-        actions.setPreferredSize(new Dimension(400,360));
+        actions.setPreferredSize(new Dimension(275,365));
+        info = new JPanel();
+        actionButtons = new JPanel();
+        actions.setLayout(new BoxLayout(actions, BoxLayout.Y_AXIS));
         
-        //Buttons
+        GridLayout infoLayout = new GridLayout(1,3);
+        infoLayout.setHgap(20);
+        info.setBorder(new EmptyBorder(5, 5, 5, 5));
+        info.add(bank);
+        info.add(new JLabel(""));
+        info.add(week);
+        
+        GridLayout actionLayout = new GridLayout(1,4);
+        actionLayout.setHgap(10);
+        actionButtons.setBorder(new EmptyBorder(5, 5, 5, 5));
+        actionButtons.setLayout(actionLayout);
+        actionButtons.add(sell);
+        actionButtons.add(prop);
+        actionButtons.add(fertilise);
+        actionButtons.add(giveLight);
+        
+        actions.add(info);
+        actions.add(name);
+        actions.add(tiers);
+        actions.add(ferts);
+        actions.add(lights);
+        actions.add(actionButtons);
+        
+        
+        //Base Buttons
         buttons = new JPanel();
         buttons.setBorder(new EmptyBorder(20, 150, 10, 10));
         GridLayout layout = new GridLayout(1,3);
@@ -225,6 +288,7 @@ public class GameView extends JPanel implements Observer {
         super.repaint();
     }
     
+    
     public void rules() {
         JPanel bpanel;
         JPanel rules;
@@ -239,7 +303,7 @@ public class GameView extends JPanel implements Observer {
         
         text.setBackground(Color.decode("#6eacdf"));
         text.setOpaque(true);
-        text.setFont(new Font("Courier new", Font.BOLD, 14));
+        text.setFont(font);
         text.setText("""
                     <html><b><center><u>HOW TO PLAY</u><br><br>
                     In this game you can buy various plant species from a supplier.<br>
@@ -280,6 +344,7 @@ public class GameView extends JPanel implements Observer {
         super.repaint();
     }
     
+    
     public void leaderboard() {
         JPanel bpanel;
         JPanel scores;
@@ -290,6 +355,7 @@ public class GameView extends JPanel implements Observer {
         //Add Text//
         scoresList.setBackground(Color.decode("#6eacdf"));
         scoresList.setOpaque(true);
+        scoresList.setFont(font);
         scoresList.setText("""
                            <html><b><center><u>LEADERBOARD</u></center><br><br>
                            1. Person 1, score<br><br>
@@ -302,8 +368,6 @@ public class GameView extends JPanel implements Observer {
                            8. Person 8, score<br><br>
                            9. Person 9, score<br><br>
                            10. Person 10, score <br></html>""");
-        
-        scoresList.setFont(new Font("Courier new", Font.BOLD, 14));
         
         //Add back button//
         bpanel = new JPanel();
@@ -327,8 +391,8 @@ public class GameView extends JPanel implements Observer {
         super.add(bpanel, BorderLayout.SOUTH);
         super.revalidate();
         super.repaint();
-        
     }
+    
     
     public void addActionListener(ActionListener listener){
         //Enter Name Menu
