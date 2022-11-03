@@ -40,5 +40,7 @@ public class GameModel extends Observable {
             this.data.tier1Four++;
         else if (plantID == 5)
             this.data.tier1Five++;
+        
+        
     }
 }

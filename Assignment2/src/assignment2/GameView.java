@@ -436,8 +436,8 @@ public class GameView extends JPanel implements Observer {
     }
     
     //update week count in play
-    public void updateWeek(int week) {
-        //week.setText("Week: " + Integer.toString(week));
+    public void updateWeek(int weekNum) {
+        week.setText("Week: " + Integer.toString(weekNum));
         super.repaint();
     }
 

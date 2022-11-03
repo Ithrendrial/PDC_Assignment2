@@ -38,7 +38,7 @@ public class GameDatabase {
             statement = conn.createStatement();
             String itemTableName = "ItemsInventory";
             if (!checkTable(itemTableName)) {
-                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12)), currentWeek INT, money INT)");
+                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12), currentWeek INT, money INT)");
             }
             statement.close();
             
@@ -195,8 +195,8 @@ public class GameDatabase {
             statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Five + "WHERE username = '" + username + "' AND plantID = '5'");
 
             statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + growLight + "WHERE username = '" + username + "'");
-            statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + fertiliser + "WHERE username = '" + username + "'");
-            statement.executeUpdate("UPDATE ItemsInventory SET currentWeek =" + fertiliser + "WHERE username = '" + username + "'");
+            statement.executeUpdate("UPDATE ItemsInventory SET fertiliser =" + fertiliser + "WHERE username = '" + username + "'");
+            statement.executeUpdate("UPDATE ItemsInventory SET currentWeek =" + currentWeek + "WHERE username = '" + username + "'");
             statement.executeUpdate("UPDATE ItemsInventory SET money =" + money + "WHERE username = '" + username + "'");
             statement.close();
         } catch (SQLException ex) {
