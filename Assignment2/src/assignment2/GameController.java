@@ -37,6 +37,7 @@ public class GameController implements ActionListener {
             case "PLAY":
                 view.play();
                 view.updateBank(model.data.money);
+                view.updateWeek(model.data.currentWeek);
                 view.updatePlantName(model.data.name1, model.data.name2, model.data.name3, model.data.name4, model.data.name5);
                 break;
             case "mainRules":
