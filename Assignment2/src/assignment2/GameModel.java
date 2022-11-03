@@ -1,11 +1,8 @@
 package assignment2;
 
 import java.util.Observable;
+import java.util.Random;
 
-/**
- *
- * @author rcox299
- */
 public class GameModel extends Observable {
 
     public GameDatabase db;
@@ -60,214 +57,291 @@ public class GameModel extends Observable {
     }
 
     //Methods for buying, selling, and propagating plants
-    public void buyPlant(int plantID) {
+    public void buyPlant(String plantID) {
+   
         switch (plantID) {
-            case 1:
+            case "Variegated Monstera":
                 this.data.tier1One++;
-                this.removeMoney(500);
+                this.removeMoney(this.data.price1);
                 break;
-            case 2:
+                
+            case "Adiantum Fragrans":
                 this.data.tier1Two++;
-                this.removeMoney(10);
+                this.removeMoney(this.data.price2);
                 break;
-            case 3:
+                
+            case "Alocasia Azlanii":
                 this.data.tier1Three++;
-                this.removeMoney(300);
+                this.removeMoney(this.data.price3);
                 break;
-            case 4:
+                
+            case "Dracaena Trifasciata":
                 this.data.tier1Four++;
-                this.removeMoney(5);
+                this.removeMoney(this.data.price4);
                 break;
-            case 5:
+                
+            case "Calathea Leitzei":
                 this.data.tier1Five++;
-                this.removeMoney(100);
+                this.removeMoney(this.data.price5);
                 break;
+                
             default:
                 break;
         }
     }
     
-    public void sellPlant(int plantID) {
+    public boolean sellPlant(String plantID) {
         switch (plantID) {
-            case 1:
+            case "Variegated Monstera":
                 if (this.data.tier5One > 0) {
                     this.data.tier5One--;
                     this.addMoney(this.data.price1*5);
+                    return true;
                 } else if (this.data.tier4One > 0) {
                     this.data.tier4One--;
                     this.addMoney(this.data.price1*4);
+                    return true;
                 } else if (this.data.tier3One > 0) {
                     this.data.tier3One--;
                     this.addMoney(this.data.price1*3);
+                    return true;
                 } else if (this.data.tier2One > 0) {
                     this.data.tier2One--;
                     this.addMoney(this.data.price1*2);
+                    return true;
                 } else if (this.data.tier1One > 0) {
                     this.data.tier1One--;
                     this.addMoney(this.data.price1);
+                    return true;
                 }
-                break;
-            case 2:
+                return false;
+                
+            case "Adiantum Fragrans":
                 if (this.data.tier5Two > 0) {
                     this.data.tier5Two--;
                     this.addMoney(this.data.price2*5);
+                    return true;
                 } else if (this.data.tier4Two > 0) {
                     this.data.tier4Two--;
                     this.addMoney(this.data.price2*4);
+                    return true;
                 } else if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
                     this.addMoney(this.data.price2*3);
+                    return true;
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
                     this.addMoney(this.data.price2*2);
+                    return true;
                 } else if (this.data.tier1Two > 0) {
                     this.data.tier1Two--;
                     this.addMoney(this.data.price2);
+                    return true;
                 }
-                break;
-            case 3:
+                return false;
+                
+            case "Alocasia Azlanii":
                 if (this.data.tier5Three > 0) {
                     this.data.tier5Three--;
                     this.addMoney(this.data.price3*5);
+                    return true;
                 } else if (this.data.tier4Three > 0) {
                     this.data.tier4Three--;
                     this.addMoney(this.data.price3*4);
+                    return true;
                 } else if (this.data.tier3Three > 0) {
                     this.data.tier3Two--;
                     this.addMoney(this.data.price3*3);
+                    return true;
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
                     this.addMoney(this.data.price3*2);
+                    return true;
                 } else if (this.data.tier1Three > 0) {
                     this.data.tier1Three--;
                     this.addMoney(this.data.price3);
+                    return true;
                 }
-                break;
-            case 4:
+                return false;
+                
+            case "Dracaena Trifasciata":
                 if (this.data.tier5Four > 0) {
                     this.data.tier5Four--;
                     this.addMoney(this.data.price4*5);
+                    return true;
                 } else if (this.data.tier4Four > 0) {
                     this.data.tier4Four--;
                     this.addMoney(this.data.price4*4);
+                    return true;
                 } else if (this.data.tier3Four > 0) {
                     this.data.tier3Four--;
                     this.addMoney(this.data.price4*3);
+                    return true;
                 } else if (this.data.tier2Four > 0) {
                     this.data.tier2Four--;
                     this.addMoney(this.data.price4*2);
+                    return true;
                 } else if (this.data.tier1Four > 0) {
                     this.data.tier1Four--;
                     this.addMoney(this.data.price4);
+                    return true;
                 }
-                break;
-            case 5:
+                return false;
+                
+            case "Calathea Leitzei":
                 if (this.data.tier5Five > 0) {
                     this.data.tier5Five--;
                     this.addMoney(this.data.price5*5);
+                    return true;
                 } else if (this.data.tier4Five > 0) {
                     this.data.tier4Five--;
                     this.addMoney(this.data.price5*4);
+                    return true;
                 } else if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
                     this.addMoney(this.data.price5*3);
+                    return true;
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
                     this.addMoney(this.data.price5*2);
+                    return true;
                 } else if (this.data.tier1Five > 0) {
                     this.data.tier1Five--;
                     this.addMoney(this.data.price5);
+                    return true;
                 }
-                break;
+                return false;
+                
             default:
-                break;
+                return true;
         }
     }
 
-    public void propagate(int plantID) {
+    public int propagate(String plantID) {
+        //Return 1 if successful, 0 if no plants, -1 if tier issue
         switch (plantID) {
-            case 1:
+            case "Variegated Monstera":
                 if (this.data.tier5One > 0) {
                     this.data.tier5One--;
                     this.data.tier4One = this.data.tier4One + 2;
+                    return 1;
                 } else if (this.data.tier4One > 0) {
                     this.data.tier4One--;
                     this.data.tier3One = this.data.tier3One + 2;
+                    return 1;
                 } else if (this.data.tier3One > 0) {
                     this.data.tier3One--;
                     this.data.tier2One = this.data.tier2One + 2;
+                    return 1;
                 } else if (this.data.tier2One > 0) {
                     this.data.tier2One--;
                     this.data.tier1One = this.data.tier1One + 2;
+                    return 1;
                 }
-                break;
-            case 2:
+                if(this.data.tier1One > 0)
+                    return -1;
+                return 0;
+            case "Adiantum Fragrans":
                 if (this.data.tier5Two > 0) {
                     this.data.tier5Two--;
                     this.data.tier4Two = this.data.tier4Two + 2;
+                    return 1;
                 } else if (this.data.tier4Two > 0) {
                     this.data.tier4Two--;
                     this.data.tier3Two = this.data.tier3Two + 2;
+                    return 1;
                 } else if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
                     this.data.tier2Two = this.data.tier2Two + 2;
+                    return 1;
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
                     this.data.tier1Two = this.data.tier1Two + 2;
+                    return 1;
                 }
-                break;
-            case 3:
+                if(this.data.tier1Two > 0)
+                    return -1;
+                return 0;
+                
+            case "Alocasia Azlanii":
                 if (this.data.tier5Three > 0) {
                     this.data.tier5Three--;
                     this.data.tier4Three = this.data.tier4Three + 2;
+                    return 1;
                 } else if (this.data.tier4Three > 0) {
                     this.data.tier4Three--;
                     this.data.tier3Three = this.data.tier3Three + 2;
+                    return 1;
                 } else if (this.data.tier3Three > 0) {
                     this.data.tier3Two--;
                     this.data.tier2Three = this.data.tier2Three + 2;
+                    return 1;
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
                     this.data.tier1Three = this.data.tier1Three + 2;
+                    return 1;
                 }
-                break;
-            case 4:
+                if(this.data.tier1Three > 0)
+                    return -1;
+                return 0;
+                
+            case "Dracaena Trifasciata":
                 if (this.data.tier5Four > 0) {
                     this.data.tier5Four--;
                     this.data.tier4Four = this.data.tier4Four + 2;
+                    return 1;
                 } else if (this.data.tier4Four > 0) {
                     this.data.tier4Four--;
                     this.data.tier3Four = this.data.tier3Four + 2;
+                    return 1;
                 } else if (this.data.tier3Four > 0) {
                     this.data.tier3Four--;
                     this.data.tier2Four = this.data.tier2Four + 2;
+                    return 1;
                 } else if (this.data.tier2Four > 0) {
                     this.data.tier2Four--;
                     this.data.tier1Four = this.data.tier1Four + 2;
+                    return 1;
                 }
-                break;
-            case 5:
+                if(this.data.tier1Four > 0)
+                    return -1;
+                return 0;
+                
+            case "Calathea Leitzei":
                 if (this.data.tier5Five > 0) {
                     this.data.tier5Five--;
                     this.data.tier4Five = this.data.tier4Five + 2;
+                    return 1;
                 } else if (this.data.tier4Five > 0) {
                     this.data.tier4Five--;
                     this.data.tier3Five = this.data.tier3Five + 2;
+                    return 1;
                 } else if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
                     this.data.tier2Five = this.data.tier2Five + 2;
+                    return 1;
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
                     this.data.tier1Five = this.data.tier1Five + 2;
+                    return 1;
                 }
-                break;
+                if(this.data.tier1Five > 0)
+                    return -1;
+                return 0;
+                
             default:
-                break;
+                return 1;
         }
     }
 
-    public void timePassed() {
+    public boolean timePassed() {
         this.data.currentWeek++;
+        
+        if(this.data.currentWeek >= 5) {
+            return true;
+        }
+        
+        return false;
     }
 
     public void buyLight() {
@@ -280,152 +354,253 @@ public class GameModel extends Observable {
         this.removeMoney(15);
     }
 
-    public void useLight(int plantID) {
+    public int useLight(String plantID) {
+        //Return 1 if successful, 0 if no plants, -1 if tier issue
         switch (plantID) {
-            case 1:
+            case "Variegated Monstera":
                 if (this.data.tier4One > 0) {
                     this.data.tier4One--;
                     this.data.tier5One = this.data.tier5One + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier3One > 0) {
                     this.data.tier3One--;
                     this.data.tier4One = this.data.tier4One + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier2One > 0) {
                     this.data.tier2One--;
                     this.data.tier3One = this.data.tier3One + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier1One > 0) {
                     this.data.tier1One--;
                     this.data.tier2One = this.data.tier2One + 1;
+                    this.data.growLight--;
+                    return 1;
                 }
-                break;
-            case 2:
+                if(this.data.tier5One > 0)
+                    return -1;
+                return 0;
+                
+            case "Adiantum Fragrans":
                 if (this.data.tier4Two > 0) {
                     this.data.tier4Two--;
                     this.data.tier5Two = this.data.tier5Two + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
                     this.data.tier4Two = this.data.tier4Two + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
                     this.data.tier3Two = this.data.tier3Two + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if(this.data.tier1Two > 0) {
                     this.data.tier1Two--;
                     this.data.tier2Two = this.data.tier2Two + 1;
+                    this.data.growLight--;
+                    return 1;
                 }
-                break;
-            case 3:
+                if(this.data.tier5Two > 0)
+                    return -1;
+                return 0;
+                
+            case "Alocasia Azlanii":
                 if (this.data.tier4Three > 0) {
                     this.data.tier4Three--;
                     this.data.tier5Three = this.data.tier5Three + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier3Three > 0) {
                     this.data.tier3Three--;
                     this.data.tier4Three = this.data.tier4Three + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
                     this.data.tier3Three = this.data.tier3Three + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if(this.data.tier1Three > 0) {
                     this.data.tier1Three--;
                     this.data.tier2Three = this.data.tier2Three + 1;
+                    this.data.growLight--;
+                    return 1;
                 }
-                break;
-            case 4:
+                if(this.data.tier5Three > 0)
+                    return -1;
+                return 0;
+                
+            case "Dracaena Trifasciata":
                 if (this.data.tier4Four > 0) {
                     this.data.tier4Four--;
                     this.data.tier5Four = this.data.tier5Four + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier3Four > 0) {
                     this.data.tier3Four--;
                     this.data.tier4Four = this.data.tier4Four + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier2Four > 0) {
                     this.data.tier2Four--;
                     this.data.tier3Four = this.data.tier3Four + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if(this.data.tier1Four > 0) {
                     this.data.tier1Four--;
                     this.data.tier2Four = this.data.tier2Four + 1;
+                    this.data.growLight--;
+                    return 1;
                 }
-                break;
-            case 5:
+                if(this.data.tier5Four > 0)
+                    return -1;
+                return 0;
+                
+            case "Calathea Leitzei":
                 if (this.data.tier4Five > 0) {
                     this.data.tier4Five--;
                     this.data.tier5Five = this.data.tier5Five + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
                     this.data.tier4Five = this.data.tier4Five + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
                     this.data.tier3Five = this.data.tier3Five + 1;
+                    this.data.growLight--;
+                    return 1;
                 } else if(this.data.tier1Five > 0) {
                     this.data.tier1Five--;
                     this.data.tier2Five = this.data.tier2Five + 1;
+                    this.data.growLight--;
+                    return 1;
                 }
-                break;
+                if(this.data.tier5Five > 0)
+                    return -1;
+                return 0;
             default:
-                break;
+                return 1;
         }
     }
     
-    public void useFertiliser(int plantID) {
+    public int useFertiliser(String plantID) {
+        //Return 1 if successful, 0 if no plants, -1 if tier issue
         switch (plantID) {
-            case 1:
+            case "Variegated Monstera":
                 if (this.data.tier3One > 0) {
                     this.data.tier3One--;
                     this.data.tier5One = this.data.tier5One + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier2One > 0) {
                     this.data.tier2One--;
                     this.data.tier4One = this.data.tier4One + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier1One > 0) {
                     this.data.tier1One--;
                     this.data.tier3One = this.data.tier3One + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 }
-                break;
-            case 2:
+                if(this.data.tier4One > 0 || this.data.tier5One > 0)
+                    return -1;
+                return 0;
+                
+            case "Adiantum Fragrans":
                 if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
                     this.data.tier5Two = this.data.tier5Two + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
                     this.data.tier4Two = this.data.tier4Two + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if(this.data.tier1Two > 0) {
                     this.data.tier1Two--;
                     this.data.tier3Two = this.data.tier3Two + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 }
-                break;
-            case 3:
+                if(this.data.tier4Two > 0 || this.data.tier5Two > 0)
+                    return -1;
+                return 0;
+                
+            case "Alocasia Azlanii":
                 if (this.data.tier3Three > 0) {
                     this.data.tier3Three--;
                     this.data.tier5Three = this.data.tier5Three + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
                     this.data.tier4Three = this.data.tier4Three + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if(this.data.tier1Three > 0) {
                     this.data.tier1Three--;
                     this.data.tier3Three = this.data.tier3Three + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 }
-                break;
-            case 4:
+                if(this.data.tier4Three > 0 || this.data.tier5Three > 0)
+                    return -1;
+                return 0;
+                
+            case "Dracaena Trifasciata":
                 if (this.data.tier3Four > 0) {
                     this.data.tier3Four--;
                     this.data.tier5Four = this.data.tier5Four + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier2Four > 0) {
                     this.data.tier2Four--;
                     this.data.tier4Four = this.data.tier4Four + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if(this.data.tier1Four > 0) {
                     this.data.tier1Four--;
                     this.data.tier3Four = this.data.tier3Four + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 }
-                break;
-            case 5:
+                if(this.data.tier4Four > 0 || this.data.tier5Four > 0)
+                    return -1;
+                return 0;
+                
+            case "Calathea Leitzei":
                 if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
                     this.data.tier5Five = this.data.tier5Five + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
                     this.data.tier4Five = this.data.tier4Five + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 } else if(this.data.tier1Five > 0) {
                     this.data.tier1Five--;
                     this.data.tier3Five = this.data.tier3Five + 1;
+                    this.data.fertiliser--;
+                    return 1;
                 }
-                break;
+                if(this.data.tier4Five > 0 || this.data.tier5Five > 0)
+                    return -1;
+                return 0;
+                
             default:
-                break;
+                return 1;
         }
     }
 }

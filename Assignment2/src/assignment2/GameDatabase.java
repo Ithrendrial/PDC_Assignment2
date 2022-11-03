@@ -1,6 +1,5 @@
 package assignment2;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -10,15 +9,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Davis Pike
- */
 public class GameDatabase {
 
     Connection conn = null;
     String url = "jdbc:derby:ThePlantShop;create=true";
-    //1.dont use the same password / username as me c:
     String user_name = "pdc";
     String password = "pdc";
 
@@ -204,9 +198,9 @@ public class GameDatabase {
     public void addLeaderBoard(int score, String username) {
         try {
             Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO LeaderBoard VALUES('" + score + "','" + username + "')");
+            statement.executeUpdate("INSERT INTO LeaderBoard VALUES(" + score + ",'" + username + "')");
             statement.close();
-
+            System.out.println("LeaderBoard entry added");
         } catch (SQLException ex) {
             System.out.println("LeaderBoard entry not successful");
         }

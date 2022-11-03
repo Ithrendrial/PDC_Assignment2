@@ -2,10 +2,6 @@ package assignment2;
 
 import java.util.List;
 
-/**
- *
- * @author Davis Pike
- */
 public class GameData {
 
     public GameDatabase dataBase;
@@ -15,6 +11,9 @@ public class GameData {
         money = 100;
     }
 
+    //userName
+    String userName;
+    
     //leader board entry
     LeaderBoard leaderBoard = new LeaderBoard();
     List<Integer> score = leaderBoard.score;

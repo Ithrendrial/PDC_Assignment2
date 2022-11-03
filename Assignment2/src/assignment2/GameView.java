@@ -2,6 +2,7 @@ package assignment2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -15,10 +16,16 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class GameView extends JPanel implements Observer {
-
+    //Reusable grids
+    private GridLayout layout1x1 = new GridLayout(1, 1);
+    private GridLayout layout1x2 = new GridLayout(1, 2);
+    private GridLayout layout1x3 = new GridLayout(1, 3);
+    private GridLayout layout1x4 = new GridLayout(1, 4);
+    
     //Login Screen Components
     private JLabel name;
     public JTextField enterName;
@@ -52,6 +59,7 @@ public class GameView extends JPanel implements Observer {
     private JLabel tiers;
     private JLabel ferts;
     private JLabel lights;
+    private JLabel warning;
 
     //Rules Screen Components
     private JButton back;
@@ -61,6 +69,9 @@ public class GameView extends JPanel implements Observer {
     //Leaderboard Components
     private JLabel scoresList;
 
+    //End Screen Components
+    private JLabel endStatement;
+    private JLabel youGot;
     
     //Constructor
     public GameView() {
@@ -70,14 +81,15 @@ public class GameView extends JPanel implements Observer {
 
     //Instantiate Components
     public void components() {
+        font = new Font("Courier new", Font.BOLD, 14);
+        
         //Instantiate Login Screen
         login = new JButton("GO");
         name = new JLabel("Enter your name: ");
+        name.setFont(font);
         enterName = new JTextField();
 
         //Instantiate Main Menu 
-        font = new Font("Courier new", Font.BOLD, 14);
-        
         play = new JButton("PLAY");
         howtoMain = new JButton("HOW TO PLAY");
         leaderboard = new JButton("LEADERBOARD");
@@ -99,29 +111,24 @@ public class GameView extends JPanel implements Observer {
         
         bank = new JLabel();
         week = new JLabel();
-        bank.setText("Bank: $");
         bank.setFont(font);
-        week.setText("Week: ");
         week.setFont(font);
-        plantName = new JLabel("<html><u>You have selected:</u><b>");
+        plantName = new JLabel("<html><u>You have selected:</u> ______");
         plantName.setFont(font);
-        tiers = new JLabel("""
-                           <html><br><br>You have:<br>
-                           n plants in tier 1,<br> 
-                           n plants in tier 2, <br> 
-                           n plants in tier 3, <br> 
-                           n plants in tier 4, <br> 
-                           n plants in tier 5, <br> 
-                           n plants in tier 6, <br> 
-                           n plants in tier 7, <br> 
-                           n plants in tier 8, <br> 
-                           n plants in tier 9, <br> 
-                           and n plants in tier 10<br><br></html>""");
+        tiers = new JLabel("<html><br><br>You have:<br>"
+                           + "_ plant(s) in tier 1,<br>"
+                           + "_ plant(s) in tier 2, <br>" 
+                           + "_ plant(s) in tier 3, <br>" 
+                           + "_ plant(s) in tier 4, <br>" 
+                           + "_ plant(s) in tier 5. <br><br></html>");
         tiers.setFont(font);
-        ferts = new JLabel("You have n bag(s) of fertiliser.");
+        ferts = new JLabel("You have _ bag(s) of fertiliser.");
         ferts.setFont(font);
-        lights = new JLabel("You have n growlights.");
+        lights = new JLabel("<html>You have _ growlights.<br><br></html>");
         lights.setFont(font);
+        warning = new JLabel("Filler");
+        warning.setFont(font);
+        warning.setForeground(Color.decode("#6eacdf"));
 
         //Instantiate Rules Screen
         back = new JButton("BACK");
@@ -130,6 +137,12 @@ public class GameView extends JPanel implements Observer {
 
         //Instantiate Leaderboard
         scoresList = new JLabel();
+        
+        //Instantiate End Screen
+        endStatement = new JLabel("Game Over!");
+        endStatement.setFont(font);
+        youGot = new JLabel("");
+        youGot.setFont(font);
     }
 
     //Login Screen Formation
@@ -138,10 +151,9 @@ public class GameView extends JPanel implements Observer {
 
         //Layout
         entrName = new JPanel();
-        GridLayout layout = new GridLayout(1, 3);
-        layout.setHgap(20);
+        layout1x3.setHgap(20);
         entrName.setBorder(new EmptyBorder(250, 5, 5, 5));
-        entrName.setLayout(layout);
+        entrName.setLayout(layout1x3);
         entrName.setBackground(Color.decode("#6eacdf"));
         
         //Add Components
@@ -164,11 +176,9 @@ public class GameView extends JPanel implements Observer {
 
         //Add Buttons//
         buttons = new JPanel();
-        GridLayout layout = new GridLayout(1, 3);
-        layout.setHgap(20);
 
         buttons.setBorder(new EmptyBorder(5, 5, 5, 5));
-        buttons.setLayout(layout);
+        buttons.setLayout(layout1x3);
         buttons.setBackground(Color.decode("#6eacdf"));
 
         buttons.add(play);
@@ -195,11 +205,14 @@ public class GameView extends JPanel implements Observer {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         JPanel header;
+        JPanel comboLabels;
         JPanel combos;
         JPanel actions;
-        JPanel info;
+        JPanel weeklyInfo;
+        JPanel stockInfo;
         JPanel actionButtons;
         JPanel buttons;
+        JPanel warningPanel;
 
         //Add header image
         header = new JPanel();
@@ -208,16 +221,27 @@ public class GameView extends JPanel implements Observer {
         header.setPreferredSize(new Dimension(400, 75));
         header.setBackground(Color.decode("#6eacdf"));
 
+        
         //Add Comboboxes
-        GridLayout layoutCombo = new GridLayout(1, 4);
-        layoutCombo.setHgap(10);
-
+        comboLabels = new JPanel();
         combos = new JPanel();
+        layout1x4.setHgap(10);
+        comboLabels.setLayout(layout1x4);
+        combos.setLayout(layout1x4);
+        
+        comboLabels.setBackground(Color.decode("#6eacdf"));
+        comboLabels.setPreferredSize(new Dimension(400, 25));
+        comboLabels.setBorder(new EmptyBorder(5, 0, 0, 0));
+        
         combos.setBackground(Color.decode("#6eacdf"));
         combos.setPreferredSize(new Dimension(400, 50));
-        combos.setBorder(new EmptyBorder(10, 0, 15, 0));
-        combos.setLayout(layoutCombo);
+        combos.setBorder(new EmptyBorder(10, 0, 5, 0));
 
+        comboLabels.add(new JLabel("Supplier:"));
+        comboLabels.add(new JLabel(""));
+        comboLabels.add(new JLabel("Inventory:"));
+        comboLabels.add(new JLabel(""));
+        
         combos.add(supplierCombobox);
         combos.add(buy);
         combos.add(stockCombobox);
@@ -225,44 +249,56 @@ public class GameView extends JPanel implements Observer {
 
         //Actions
         //Layout
-        actions = new JPanel();
-        actions.setPreferredSize(new Dimension(275, 365));
-        info = new JPanel();
-        actionButtons = new JPanel();
+        actions = new JPanel(); //foundation panel
+        weeklyInfo = new JPanel(); //subpanel top
+        stockInfo = new JPanel(); //subpanel middle
+        actionButtons = new JPanel(); //subpanel bottom
+        actions.setPreferredSize(new Dimension(275, 315));
         actions.setLayout(new BoxLayout(actions, BoxLayout.Y_AXIS));
 
-        GridLayout infoLayout = new GridLayout(1, 3);
-        infoLayout.setHgap(20);
-        info.setBorder(new EmptyBorder(5, 5, 5, 5));
-        GridLayout actionLayout = new GridLayout(1, 4);
-        actionLayout.setHgap(10);
-        actionButtons.setBorder(new EmptyBorder(5, 5, 5, 5));
-        actionButtons.setLayout(actionLayout);
+        //Weekly Info
+        weeklyInfo.setBorder(new EmptyBorder(5, 15, 5, 5));
+        weeklyInfo.setLayout(layout1x2);
+        weeklyInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        //Sction JLabels
-        info.add(bank);
-        info.add(new JLabel(""));
-        info.add(week);
-
+        bank.setHorizontalAlignment(SwingConstants.LEFT);
+        week.setHorizontalAlignment(SwingConstants.LEFT);
+        weeklyInfo.add(bank);
+        weeklyInfo.add(week);
+        
+        //Stock 
+        stockInfo.setLayout(new BoxLayout(stockInfo, BoxLayout.Y_AXIS));
+        stockInfo.setBorder(new EmptyBorder(5, 10, 5, 5));
+        stockInfo.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        
+        stockInfo.add(plantName);
+        stockInfo.add(tiers);
+        stockInfo.add(ferts);
+        stockInfo.add(lights);
+        
         //Action Buttons
+        
+        actionButtons.setBorder(new EmptyBorder(5, 5, 5, 5));
+        actionButtons.setLayout(layout1x4);
+        
         actionButtons.add(sell);
         actionButtons.add(prop);
         actionButtons.add(fertilise);
-        actionButtons.add(giveLight);
+        actionButtons.add(giveLight); 
 
-        actions.add(info);
-        actions.add(plantName);
-        actions.add(tiers);
-        actions.add(ferts);
-        actions.add(lights);
+        actions.add(weeklyInfo);
+        actions.add(stockInfo);
         actions.add(actionButtons);
+        
+        //Warning Panel
+        warningPanel = new JPanel();
+        warningPanel.setBackground(Color.decode("#6eacdf"));
+        warningPanel.add(warning);
 
         //Footer Buttons
         buttons = new JPanel();
         buttons.setBorder(new EmptyBorder(20, 275, 10, 10));
-        GridLayout layout = new GridLayout(1, 3);
-        layout.setHgap(20);
-        buttons.setLayout(layout);
+        buttons.setLayout(layout1x3);
         buttons.setBackground(Color.decode("#6eacdf"));
 
         buttons.add(main);
@@ -270,8 +306,10 @@ public class GameView extends JPanel implements Observer {
 
         //Frame Formation
         panel.add(header);
+        panel.add(comboLabels);
         panel.add(combos);
         panel.add(actions);
+        panel.add(warningPanel);
         panel.add(buttons);
 
         //Add to Window
@@ -306,10 +344,7 @@ public class GameView extends JPanel implements Observer {
                     Each plant species has a value mulitiplier which determines the<br>
                     selling worth (e.g. if the multiplier is 30 and you sell a tier 2<br>
                     plant, you will earn 2 x 30 = $60).<br><br>
-                     
-                    Every week that passes, there is a 50% chance that one of your<br>
-                    plants will increase by one tier.<br><br>
-                     
+
                     If you use a growlight, which can also be bought from the<br>
                     supplier, then one of your highest tier plants (excluding those<br>
                     in the highest tier) will increase by one tier. The same rules<br>
@@ -319,12 +354,12 @@ public class GameView extends JPanel implements Observer {
                     If you propagate, one of your plants in the highest tier will be<br>
                     split into two plants of the previous tier.<br><br>
                      
-                    Happy Plant Keeping!</html>""");
+                    Happy Plant Keeping!<br><br><br><br></html>""");
 
         //Add back button//
         bpanel = new JPanel();
         bpanel.setBorder(new EmptyBorder(20, 475, 20, 20));
-        bpanel.setLayout(new GridLayout(1, 1));
+        bpanel.setLayout(layout1x1);
         bpanel.setBackground(Color.decode("#6eacdf"));
         bpanel.add(back);
 
@@ -364,7 +399,7 @@ public class GameView extends JPanel implements Observer {
         //Add back button//
         bpanel = new JPanel();
         bpanel.setBorder(new EmptyBorder(20, 475, 20, 20));
-        bpanel.setLayout(new GridLayout(1, 1));
+        bpanel.setLayout(layout1x1);
         bpanel.setBackground(Color.decode("#6eacdf"));
 
         bpanel.add(back);
@@ -381,6 +416,27 @@ public class GameView extends JPanel implements Observer {
         super.add(pots, BorderLayout.NORTH);
         super.add(scores, BorderLayout.CENTER);
         super.add(bpanel, BorderLayout.SOUTH);
+        super.revalidate();
+        super.repaint();
+    }
+    
+    public void endScreen() {
+        JPanel end;
+
+        //Layout
+        end = new JPanel();
+        end.setBorder(new EmptyBorder(250, 5, 5, 5));
+        end.setLayout(new GridLayout(2,1));
+        end.setBackground(Color.decode("#6eacdf"));
+        
+        //Add Components
+        end.add(endStatement);
+        end.add(youGot);
+
+        //Add to window
+        super.removeAll();
+        super.setBackground(Color.decode("#6eacdf"));
+        super.add(end);
         super.revalidate();
         super.repaint();
     }
@@ -401,9 +457,25 @@ public class GameView extends JPanel implements Observer {
         //Play Actions
         buy.addActionListener(listener);
         select.addActionListener(listener);
+        sell.addActionListener(listener);
+        prop.addActionListener(listener);
+        fertilise.addActionListener(listener);
+        giveLight.addActionListener(listener);
         main.addActionListener(listener);
         howtoPlay.addActionListener(listener);
         howtoPlay.setActionCommand("playRules");
+    }
+    
+    //Get selected value in supplier combobox
+    public Object getSupplierValue() {
+        Object name = supplierCombobox.getSelectedItem();
+        return name;
+    }
+    
+    //Get selected value in stock combobox
+        public Object getStockValue() {
+        Object name = stockCombobox.getSelectedItem();
+        return name;
     }
     
     //Update plant names in the Comboboxes
@@ -429,12 +501,78 @@ public class GameView extends JPanel implements Observer {
         super.repaint();
     }
     
-    //Update 
-    public void updatePlantName(String plant) {
-        plantName.setText("<html><u>You have selected: </u><b>" + plant);
+    //Robustness Warnings//
+    //Clear displayed warnings
+    public void clearWarnings() {
+        warning.setForeground(Color.decode("#6eacdf")); //Changing colour because setting to empty moves buttons to fill empty space
+    }
+    //Warning for insufficient funds
+    public void noMoney() {
+        warning.setText("You do not have enough money to do this.");
+        warning.setForeground(Color.decode("#c30000"));
         super.repaint();
     }
+    
+    //Warning for no plants to act on
+    public void noPlant() {
+        warning.setText("You do not own this plant.");
+        warning.setForeground(Color.decode("#c30000"));
+        super.repaint();
+    }
+    
+    //No Item
+    public void noItem() {
+        warning.setText("You do not own this item.");
+        warning.setForeground(Color.decode("#c30000"));
+        super.repaint();
+    }
+    
+    //Warning for plant tier too low
+    public void tooLow() {
+        warning.setText("You cannot propagate a tier 1 plant.");
+        warning.setForeground(Color.decode("#c30000"));
+        super.repaint();
+    }
+        
+    //Warning for plant tier too high
+    public void tooHigh() {
+        warning.setText("Your plant's tier is too high to complete this action.");
+        warning.setForeground(Color.decode("#c30000"));
+        super.repaint();
+    }
+        
+    //Plant Grows a Leaf
+    public void newLeaf(String plant) {
+        warning.setText(plantName + " plant grew a new leaf!");
+        warning.setForeground(Color.decode("#005d1d"));
+        super.repaint();
+    }
+    
+    //Update plant name when selected
+    public void updatePlantName(String plant) {
+        plantName.setText("<html><u>You have selected:</u> <b>" + plant);
+        super.repaint();
+    }
+    
+    //Update plant info
+    public void updatePlantInfo(String plant, int t1, int t2, int t3, int t4, int t5) {
+        tiers.setText("<html>You have:<br>"
+                    + t1 + " plant(s) in tier 1,<br>"
+                    + t2 + " plant(s) in tier 2, <br>" 
+                    + t3 + " plant(s) in tier 3, <br>" 
+                    + t4 + " plant(s) in tier 4, <br>" 
+                    + t5 + " plant(s) in tier 5. <br><br></html>");
 
+        super.repaint();
+    }
+    
+    //Update item info 
+    public void updateItemInfo(int fertiliser, int growlights) {
+        ferts.setText("You have " + fertiliser + " bag(s) of fertiliser.");
+        lights.setText("<html>You have " + growlights + " growlight(s).<br><br></html>");
+        super.repaint();  
+    }
+    
     //Update player money in play 
     public void updateBank(int money) {
         bank.setText("Bank: $" + Integer.toString(money));
@@ -444,6 +582,12 @@ public class GameView extends JPanel implements Observer {
     //Update week count in play
     public void updateWeek(int weekNum) {
         week.setText("Week: " + Integer.toString(weekNum));
+        super.repaint();
+    }
+    
+    //End Screen Score
+    public void getScore(int score) {
+        youGot.setText("Your final balance was: $" + Integer.toString(score));
         super.repaint();
     }
 

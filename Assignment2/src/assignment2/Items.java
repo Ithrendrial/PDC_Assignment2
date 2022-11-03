@@ -1,9 +1,5 @@
 package assignment2;
 
-/**
- *
- * @author rcox2
- */
 public class Items {
     int growLight;
     int fertiliser;
