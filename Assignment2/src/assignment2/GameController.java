@@ -46,6 +46,7 @@ public class GameController implements ActionListener {
                 break;
             case "LEADERBOARD":
                 view.leaderboard();
+                origin = true;
                 break;
             case "BACK":
                 if (origin) {
