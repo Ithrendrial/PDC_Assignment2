@@ -11,11 +11,44 @@ public class GameModel extends Observable {
     public GameDatabase db;
     public GameData data;
     public String username;
-    Inventory userInventory;
 
     public GameModel() {
         this.db = new GameDatabase();
         this.db.dbSetup();
+    }
+    
+     public boolean addLight(int numberOfLight){
+        if(this.data.money >= numberOfLight*10){
+            this.data.growLight = this.data.growLight + numberOfLight;
+            this.removeMoney((numberOfLight*10));
+            return true;
+        } 
+        else {
+            System.out.println("You do not have enough money to do this.");
+            return false;
+        }
+    }
+     
+     public boolean addFertiliser(int numberOfFertiliser){ 
+        if(this.data.money >= numberOfFertiliser*15){
+            this.data.fertiliser = this.data.fertiliser + numberOfFertiliser;
+            this.removeMoney((numberOfFertiliser*15));
+            return true;
+        } 
+        else {
+            System.out.println("You do not have enough money to do this.");
+            return false;
+        }
+    }
+    
+    //Money increases by n
+    public void addMoney(int money){
+        this.data.money = this.data.money + money;
+    }
+    
+    //Money decreases by n
+    public void removeMoney(int money){
+        this.data.money = this.data.money - money;
     }
 
     public void checkName(String username) {
@@ -28,16 +61,29 @@ public class GameModel extends Observable {
 
     //Methods for buying, selling, and propagating plants
     public void buyPlant(int plantID) {
-        if (plantID == 1) {
-            this.data.tier1One++;
-        } else if (plantID == 2) {
-            this.data.tier1Two++;
-        } else if (plantID == 3) {
-            this.data.tier1Three++;
-        } else if (plantID == 4) {
-            this.data.tier1Four++;
-        } else if (plantID == 5) {
-            this.data.tier1Five++;
+        switch (plantID) {
+            case 1:
+                this.data.tier1One++;
+                this.removeMoney(500);
+                break;
+            case 2:
+                this.data.tier1Two++;
+                this.removeMoney(10);
+                break;
+            case 3:
+                this.data.tier1Three++;
+                this.removeMoney(300);
+                break;
+            case 4:
+                this.data.tier1Four++;
+                this.removeMoney(5);
+                break;
+            case 5:
+                this.data.tier1Five++;
+                this.removeMoney(100);
+                break;
+            default:
+                break;
         }
     }
 
@@ -46,14 +92,19 @@ public class GameModel extends Observable {
             case 1:
                 if (this.data.tier5One > 0) {
                     this.data.tier5One--;
+                    this.addMoney(this.data.price1*5);
                 } else if (this.data.tier4One > 0) {
                     this.data.tier4One--;
+                    this.addMoney(this.data.price1*4);
                 } else if (this.data.tier3One > 0) {
                     this.data.tier3One--;
+                    this.addMoney(this.data.price1*3);
                 } else if (this.data.tier2One > 0) {
                     this.data.tier2One--;
+                    this.addMoney(this.data.price1*2);
                 } else if (this.data.tier1One > 0) {
                     this.data.tier1One--;
+                    this.addMoney(this.data.price1);
                 }
                 break;
             case 2:
