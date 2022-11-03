@@ -15,24 +15,17 @@ public class GameModel extends Observable {
     public GameDatabase db;
     public GameData data;
     public String username;
-    public String password;
 
     public GameModel() {
         this.db = new GameDatabase();
         this.db.dbSetup();
     }
 
-    public void checkName(String username, String password) {
+    public void checkName(String username) {
         this.username = username;
-        this.password = password;
-        this.data = this.db.checkPlayer(username, password);
+        this.data = this.db.checkPlayer(username);
 
         this.setChanged();
         this.notifyObservers(this.data);
-    }
-
-    public void test() {
-        double test = data.playerMoney;
-        System.out.println(test);
     }
 }

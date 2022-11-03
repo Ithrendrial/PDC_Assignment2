@@ -1,5 +1,6 @@
 package assignment2;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -11,145 +12,211 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Davis Pike
+ * @author Davis Pike (Pb - fixed)
  */
-public class GameDatabase 
-{
+public class GameDatabase {
+
     Connection conn = null;
     String url = "jdbc:derby:ThePlantShop;create=true";
-    String USER_NAME = "pdc";
-    String PASSWORD = "pdc";
-    
-    public void dbSetup()
-    {
-        try
-        {
-            conn = DriverManager.getConnection(url, USER_NAME, PASSWORD);
+    //1.dont use the same password / username as me c:
+    String user_name = "pdc";
+    String password = "pdc";
+
+    //1.removed redundant code
+    //2.in statement.executeUpdate(); missing bracket was added
+    //3.rearranged the entire database structure please have a read through (database only use to save non-static data, eg: player save data, eg for not good in database: plant price)
+    public void dbSetup() {
+        try {
+            conn = DriverManager.getConnection(url, user_name, password);
             Statement statement = conn.createStatement();
-            String tableName = "Plants";
-            if(!checkTable(tableName))
-            {
-                statement.executeUpdate("CREATE TABLE" + tableName + " (PLAND_ID INTEGER NOT NULL, SPECIES CHAR(100) NOT NULL, PRICEWEIGHT INTEGER NOT NULL, TIER1 INTEGER NOT NULL, TIER2 INTEGER NOT NULL, TIER3 INTEGER NOT NULL, TIER4 INTEGER NOT NULL, TIER5 INTEGER NOT NULL, TIER6 INTEGER NOT NULL, TIER7 INTEGER NOT NULL, TIER8 INTEGER NOT NULL, TIER9 INTEGER NOT NULL, TIER10 INTEGER NOT NULL, PRIMARY KEY (PLAND_ID)");
-                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (1, 'Monstera Deliciosa', 500, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
-                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (2, 'Adiantum Fragrans', 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
-                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (3, 'Alocasia Azlanii', 300, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
-                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (4, 'Dracaena Trifasciata', 5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
-                statement.executeUpdate("INSERT INTO" + tableName + " (PLAND_ID, SPECIES, PRICEWEIGHT, TIER1, TIER2, TIER3, TIER4, TIER5, TIER6, TIER7, TIER8, TIER9, TIER10)" + "VALUES (5, 'Calathea Leitzei', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)");
+            String plantTableName = "PlantsInventory";
+            if (!checkTable(plantTableName)) {
+                statement.executeUpdate("CREATE TABLE " + plantTableName + " (plantID INT, t1 INT, t2 INT, t3 INT, t4 INT, t5 INT, username VARCHAR(12))");
             }
             statement.close();
-        }
-        
-        catch(Throwable e)
-        {
-            System.out.println("Error -Please ensure that the Derby Jars are in Libraries.");
-        }
-        
-        try
-        {
-            conn = DriverManager.getConnection(url, USER_NAME, PASSWORD);
-            Statement statement = conn.createStatement();
-            String tableName = "LeaderBoard";
-            if(!checkTable(tableName))
-            {
-                statement.executeUpdate("CREATE TABLE" + tableName + " (SAVE_FILE INTEGER NOT NULL, NUM_OF_PLANTS INTEGER NOT NULL, NUM_OF_WEEKS INTEGER NOT NULL, NUM_OF_GROWLIGHT INTEGER NOT NULL, NUM_OF_FERTILISER INTEGER NOT NULL, MONEY DOUBLE NOT NULL, PRIMARY KEY (SAVE_FILE)");
+
+            statement = conn.createStatement();
+            String itemTableName = "ItemsInventory";
+            if (!checkTable(itemTableName)) {
+                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12))");
             }
             statement.close();
-        }
-        
-        catch(Throwable e)
-        {
+            
+            statement = conn.createStatement();
+            String leaderBoardTableName = "LeaderBoard";
+            if (!checkTable(leaderBoardTableName)) {
+                statement.executeUpdate("CREATE TABLE " + leaderBoardTableName + " (score INT, username VARCHAR(12))");
+            }
+            statement.close();
+            
+        } catch (Throwable e) {
             System.out.println("Error -Please ensure that the Derby Jars are in Libraries.");
         }
     }
-    
-    public GameData checkPlayer(String username, String password)
-    {
+
+    public GameData checkPlayer(String username) {
         GameData data = new GameData();
-        try
-        {
+        try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM LeaderBoard " + "WHERE saveFile = '" + username + "'");
-            if(rs.next())
-            {
-                String pass = rs.getString("password");
-                System.out.println("***" + pass);
+            ResultSet rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '1'");
+            if (rs.next()) {
                 System.out.println("found user");
-                
-                if(password.compareTo(pass) == 0)
-                {
-                    data.playerMoney = rs.getInt("money");
-                    data.playerPlants = rs.getInt("plants");
-                    data.playerWeeks = rs.getInt("weeks");
-                    data.playerGrowLight = rs.getInt("grow light");
-                    data.playerFertiliser = rs.getInt("Fertiliser");
-                    data.loginFlag = true;
-                }
-                else
-                {
-                    data.loginFlag = false;
-                }
-            }
-            else
-            {
+                data.tier1One = rs.getInt("t1");
+                data.tier2One = rs.getInt("t2");
+                data.tier3One = rs.getInt("t3");
+                data.tier4One = rs.getInt("t4");
+                data.tier5One = rs.getInt("t5");
+
+                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '2'");
+                data.tier1Two = rs.getInt("t1");
+                data.tier2Two = rs.getInt("t2");
+                data.tier3Two = rs.getInt("t3");
+                data.tier4Two = rs.getInt("t4");
+                data.tier5Two = rs.getInt("t5");
+
+                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '3'");
+                data.tier1Three = rs.getInt("t1");
+                data.tier2Three = rs.getInt("t2");
+                data.tier3Three = rs.getInt("t3");
+                data.tier4Three = rs.getInt("t4");
+                data.tier5Three = rs.getInt("t5");
+
+                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '4'");
+                data.tier1Four = rs.getInt("t1");
+                data.tier2Four = rs.getInt("t2");
+                data.tier3Four = rs.getInt("t3");
+                data.tier4Four = rs.getInt("t4");
+                data.tier5Four = rs.getInt("t5");
+
+                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '5'");
+                data.tier1Five = rs.getInt("t1");
+                data.tier2Five = rs.getInt("t2");
+                data.tier3Five = rs.getInt("t3");
+                data.tier4Five = rs.getInt("t4");
+                data.tier5Five = rs.getInt("t5");
+
+                rs = statement.executeQuery("SELECT * FROM ItemsInventory WHERE username = '" + username + "'");
+                data.fertiliser = rs.getInt("fertiliser");
+                data.growLight = rs.getInt("growLight");
+
+            } else {
                 System.out.println("User created and added to DB");
-                statement.executeUpdate("INSERT INTO GameProfile " + "VALUES('" + username + "', '" + password + "', 1, 1, 1, 0)");
-                data.loginFlag = true;
+
+                statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(1, 0, 0, 0, 0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(2, 0, 0, 0, 0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(3, 0, 0, 0, 0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(4, 0, 0, 0, 0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(5, 0, 0, 0, 0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO ItemsInventory " + "VALUES(0, 0, '" + username + "')");
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(GameDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        catch (SQLException ex)
-        {
+        return data;
+    }
+
+    private boolean checkTable(String newTable) {
+        boolean flag = false;
+
+        try {
+            System.out.println("check existing tables.... ");
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);
+            while (rsDBMeta.next()) {
+                String tableName = rsDBMeta.getString("TABLE_NAME");
+                if (tableName.compareToIgnoreCase(newTable) == 0) {
+                    System.out.println(tableName + " exists in your Database");
+                    flag = true;
+                }
+            }
+            if (rsDBMeta != null) {
+                rsDBMeta.close();
+            }
+        } catch (SQLException ex) {
+
+        }
+        return flag;
+    }
+
+    public void saveDB(int t1One, int t2One, int t3One, int t4One, int t5One,
+            int t1Two, int t2Two, int t3Two, int t4Two, int t5Two,
+            int t1Three, int t2Three, int t3Three, int t4Three, int t5Three,
+            int t1Four, int t2Four, int t3Four, int t4Four, int t5Four,
+            int t1Five, int t2Five, int t3Five, int t4Five, int t5Five,
+            int growLight, int fertiliser,
+            String username) {
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1One + "WHERE username = '" + username + "' AND plant_id = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2One + "WHERE username = '" + username + "' AND plant_id = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3One + "WHERE username = '" + username + "' AND plant_id = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4One + "WHERE username = '" + username + "' AND plant_id = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5One + "WHERE username = '" + username + "' AND plant_id = '1'");
+
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+
+            statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + growLight + "WHERE username = '" + username + "'");
+            statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + fertiliser + "WHERE username = '" + username + "'");
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Update not successful");
+        }
+    }
+
+    public void addLeaderBoard(int score, String username) {
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate("INSERT INTO LeaderBoard VALUES('" + score + "','" + username + "')");
+            statement.close();
+
+        } catch (SQLException ex) {
+            System.out.println("LeaderBoard entry not successful");
+        }
+    }
+
+    public GameData leaderBoard(GameData data) {
+        GameData leaderBoardData = data;
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT score FROM LeaderBoard");
+            
+            while(rs.next())
+            {
+                leaderBoardData.score.add(rs.getInt("score"));
+                leaderBoardData.name.add(rs.getString("username"));
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(GameDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
     }
     
-    private boolean checkTable(String newTable)
-    {
-        boolean flag = false;
-        
-        try
-        {
-            System.out.println("check existing tables.... ");
-            DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);
-            while (rsDBMeta.next())
-            {
-                String tableName = rsDBMeta.getString("TABLE_NAME");
-                if (tableName.compareToIgnoreCase(newTable) == 0) 
-                {
-                    System.out.println(tableName + " exists in your Database");
-                    flag = true;
-                }
-            }
-            if(rsDBMeta != null)
-            {
-                rsDBMeta.close();
-            }
-        }
-        catch(SQLException ex)
-        {
-            
-        }
-        return flag;
-    }
-    
-    public void saveDB(int saveFile, double money, int numOfPlants, int numOfWeeks, int numOfGrowLight, int numOfFertiliser)
-    {
-        Statement statement;
-        try
-        {
-            statement = conn.createStatement();
-            statement.executeUpdate("UPDATE LeaderBoard SET money=" + money + "WHERE saveFile = '" + saveFile + "'");
-            statement.executeUpdate("UPDATE LeaderBoard SET numOfPlants=" + numOfPlants + "WHERE saveFile = '" + saveFile + "'");
-            statement.executeUpdate("UPDATE LeaderBoard SET numOfWeeks=" + numOfWeeks + "WHERE saveFile = '" + saveFile + "'");
-            statement.executeUpdate("UPDATE LeaderBoard SET numOfGrowLight=" + numOfGrowLight + "WHERE saveFile = '" + saveFile + "'");
-            statement.executeUpdate("UPDATE LeaderBoard SET numOfFertiliser=" + numOfFertiliser + "WHERE saveFile = '" + saveFile + "'");
-        }
-        
-        catch(SQLException ex)
-        {
-            System.out.println("Update not successful");
-        }
+    public static void main(String[] args) {
+        GameDatabase test = new GameDatabase();
+        test.dbSetup();
     }
 }
