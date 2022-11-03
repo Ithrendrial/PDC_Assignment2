@@ -1,6 +1,5 @@
 package assignment2;
 
-import static assignment2.PlantAction.ANSI_RED;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
