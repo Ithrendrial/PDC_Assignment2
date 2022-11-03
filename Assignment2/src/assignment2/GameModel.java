@@ -86,7 +86,7 @@ public class GameModel extends Observable {
                 break;
         }
     }
-
+    
     public void sellPlant(int plantID) {
         switch (plantID) {
             case 1:
@@ -110,53 +110,73 @@ public class GameModel extends Observable {
             case 2:
                 if (this.data.tier5Two > 0) {
                     this.data.tier5Two--;
+                    this.addMoney(this.data.price2*5);
                 } else if (this.data.tier4Two > 0) {
                     this.data.tier4Two--;
+                    this.addMoney(this.data.price2*4);
                 } else if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
+                    this.addMoney(this.data.price2*3);
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
+                    this.addMoney(this.data.price2*2);
                 } else if (this.data.tier1Two > 0) {
                     this.data.tier1Two--;
+                    this.addMoney(this.data.price2);
                 }
                 break;
             case 3:
                 if (this.data.tier5Three > 0) {
                     this.data.tier5Three--;
+                    this.addMoney(this.data.price3*5);
                 } else if (this.data.tier4Three > 0) {
                     this.data.tier4Three--;
+                    this.addMoney(this.data.price3*4);
                 } else if (this.data.tier3Three > 0) {
                     this.data.tier3Two--;
+                    this.addMoney(this.data.price3*3);
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
+                    this.addMoney(this.data.price3*2);
                 } else if (this.data.tier1Three > 0) {
                     this.data.tier1Three--;
+                    this.addMoney(this.data.price3);
                 }
                 break;
             case 4:
                 if (this.data.tier5Four > 0) {
                     this.data.tier5Four--;
+                    this.addMoney(this.data.price4*5);
                 } else if (this.data.tier4Four > 0) {
                     this.data.tier4Four--;
+                    this.addMoney(this.data.price4*4);
                 } else if (this.data.tier3Four > 0) {
                     this.data.tier3Four--;
+                    this.addMoney(this.data.price4*3);
                 } else if (this.data.tier2Four > 0) {
                     this.data.tier2Four--;
+                    this.addMoney(this.data.price4*2);
                 } else if (this.data.tier1Four > 0) {
                     this.data.tier1Four--;
+                    this.addMoney(this.data.price4);
                 }
                 break;
             case 5:
                 if (this.data.tier5Five > 0) {
                     this.data.tier5Five--;
+                    this.addMoney(this.data.price5*5);
                 } else if (this.data.tier4Five > 0) {
                     this.data.tier4Five--;
+                    this.addMoney(this.data.price5*4);
                 } else if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
+                    this.addMoney(this.data.price5*3);
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
+                    this.addMoney(this.data.price5*2);
                 } else if (this.data.tier1Five > 0) {
                     this.data.tier1Five--;
+                    this.addMoney(this.data.price5);
                 }
                 break;
             default:
@@ -184,31 +204,31 @@ public class GameModel extends Observable {
             case 2:
                 if (this.data.tier5Two > 0) {
                     this.data.tier5Two--;
-                    this.data.tier4Two = this.data.tier4Two = 2;
+                    this.data.tier4Two = this.data.tier4Two + 2;
                 } else if (this.data.tier4Two > 0) {
                     this.data.tier4Two--;
-                    this.data.tier3Two = this.data.tier3Two = 2;
+                    this.data.tier3Two = this.data.tier3Two + 2;
                 } else if (this.data.tier3Two > 0) {
                     this.data.tier3Two--;
-                    this.data.tier2Two = this.data.tier2Two = 2;
+                    this.data.tier2Two = this.data.tier2Two + 2;
                 } else if (this.data.tier2Two > 0) {
                     this.data.tier2Two--;
-                    this.data.tier1Two = this.data.tier1Two = 2;
+                    this.data.tier1Two = this.data.tier1Two + 2;
                 }
                 break;
             case 3:
                 if (this.data.tier5Three > 0) {
                     this.data.tier5Three--;
-                    this.data.tier4Three = this.data.tier4Three = 2;
+                    this.data.tier4Three = this.data.tier4Three + 2;
                 } else if (this.data.tier4Three > 0) {
                     this.data.tier4Three--;
-                    this.data.tier3Three = this.data.tier3Three = 2;
+                    this.data.tier3Three = this.data.tier3Three + 2;
                 } else if (this.data.tier3Three > 0) {
                     this.data.tier3Two--;
-                    this.data.tier2Three = this.data.tier2Three = 2;
+                    this.data.tier2Three = this.data.tier2Three + 2;
                 } else if (this.data.tier2Three > 0) {
                     this.data.tier2Three--;
-                    this.data.tier1Three = this.data.tier1Three = 2;
+                    this.data.tier1Three = this.data.tier1Three + 2;
                 }
                 break;
             case 4:
@@ -229,16 +249,16 @@ public class GameModel extends Observable {
             case 5:
                 if (this.data.tier5Five > 0) {
                     this.data.tier5Five--;
-                    this.data.tier4Five = this.data.tier4Five = 2;
+                    this.data.tier4Five = this.data.tier4Five + 2;
                 } else if (this.data.tier4Five > 0) {
                     this.data.tier4Five--;
-                    this.data.tier3Five = this.data.tier3Five = 2;
+                    this.data.tier3Five = this.data.tier3Five + 2;
                 } else if (this.data.tier3Five > 0) {
                     this.data.tier3Five--;
-                    this.data.tier2Five = this.data.tier2Five = 2;
+                    this.data.tier2Five = this.data.tier2Five + 2;
                 } else if (this.data.tier2Five > 0) {
                     this.data.tier2Five--;
-                    this.data.tier1Five = this.data.tier1Five = 2;
+                    this.data.tier1Five = this.data.tier1Five + 2;
                 }
                 break;
             default:
@@ -252,27 +272,160 @@ public class GameModel extends Observable {
 
     public void buyLight() {
         this.data.growLight++;
+        this.removeMoney(10);
     }
 
     public void buyFertiliser() {
         this.data.fertiliser++;
+        this.removeMoney(15);
     }
 
-    public void useLight() {
-        if (this.data.growLight > 0) {
-            this.data.growLight--;
-            System.out.println("You used a grow light on your plant");
-        } else {
-            System.out.println("You do not own enough grow lights to do this.");
+    public void useLight(int plantID) {
+        switch (plantID) {
+            case 1:
+                if (this.data.tier4One > 0) {
+                    this.data.tier4One--;
+                    this.data.tier5One = this.data.tier5One + 1;
+                } else if (this.data.tier3One > 0) {
+                    this.data.tier3One--;
+                    this.data.tier4One = this.data.tier4One + 1;
+                } else if (this.data.tier2One > 0) {
+                    this.data.tier2One--;
+                    this.data.tier3One = this.data.tier3One + 1;
+                } else if (this.data.tier1One > 0) {
+                    this.data.tier1One--;
+                    this.data.tier2One = this.data.tier2One + 1;
+                }
+                break;
+            case 2:
+                if (this.data.tier4Two > 0) {
+                    this.data.tier4Two--;
+                    this.data.tier5Two = this.data.tier5Two + 1;
+                } else if (this.data.tier3Two > 0) {
+                    this.data.tier3Two--;
+                    this.data.tier4Two = this.data.tier4Two + 1;
+                } else if (this.data.tier2Two > 0) {
+                    this.data.tier2Two--;
+                    this.data.tier3Two = this.data.tier3Two + 1;
+                } else if(this.data.tier1Two > 0) {
+                    this.data.tier1Two--;
+                    this.data.tier2Two = this.data.tier2Two + 1;
+                }
+                break;
+            case 3:
+                if (this.data.tier4Three > 0) {
+                    this.data.tier4Three--;
+                    this.data.tier5Three = this.data.tier5Three + 1;
+                } else if (this.data.tier3Three > 0) {
+                    this.data.tier3Three--;
+                    this.data.tier4Three = this.data.tier4Three + 1;
+                } else if (this.data.tier2Three > 0) {
+                    this.data.tier2Three--;
+                    this.data.tier3Three = this.data.tier3Three + 1;
+                } else if(this.data.tier1Three > 0) {
+                    this.data.tier1Three--;
+                    this.data.tier2Three = this.data.tier2Three + 1;
+                }
+                break;
+            case 4:
+                if (this.data.tier4Four > 0) {
+                    this.data.tier4Four--;
+                    this.data.tier5Four = this.data.tier5Four + 1;
+                } else if (this.data.tier3Four > 0) {
+                    this.data.tier3Four--;
+                    this.data.tier4Four = this.data.tier4Four + 1;
+                } else if (this.data.tier2Four > 0) {
+                    this.data.tier2Four--;
+                    this.data.tier3Four = this.data.tier3Four + 1;
+                } else if(this.data.tier1Four > 0) {
+                    this.data.tier1Four--;
+                    this.data.tier2Four = this.data.tier2Four + 1;
+                }
+                break;
+            case 5:
+                if (this.data.tier4Five > 0) {
+                    this.data.tier4Five--;
+                    this.data.tier5Five = this.data.tier5Five + 1;
+                } else if (this.data.tier3Five > 0) {
+                    this.data.tier3Five--;
+                    this.data.tier4Five = this.data.tier4Five + 1;
+                } else if (this.data.tier2Five > 0) {
+                    this.data.tier2Five--;
+                    this.data.tier3Five = this.data.tier3Five + 1;
+                } else if(this.data.tier1Five > 0) {
+                    this.data.tier1Five--;
+                    this.data.tier2Five = this.data.tier2Five + 1;
+                }
+                break;
+            default:
+                break;
         }
     }
     
-    public void useFertiliser() {
-        if (this.data.fertiliser > 0) {
-            this.data.fertiliser--;
-            System.out.println("You used fertiliser on your plant");
-        } else {
-            System.out.println("You do not own enough fertiliser to do this.");
+    public void useFertiliser(int plantID) {
+        switch (plantID) {
+            case 1:
+                if (this.data.tier3One > 0) {
+                    this.data.tier3One--;
+                    this.data.tier5One = this.data.tier5One + 1;
+                } else if (this.data.tier2One > 0) {
+                    this.data.tier2One--;
+                    this.data.tier4One = this.data.tier4One + 1;
+                } else if (this.data.tier1One > 0) {
+                    this.data.tier1One--;
+                    this.data.tier3One = this.data.tier3One + 1;
+                }
+                break;
+            case 2:
+                if (this.data.tier3Two > 0) {
+                    this.data.tier3Two--;
+                    this.data.tier5Two = this.data.tier5Two + 1;
+                } else if (this.data.tier2Two > 0) {
+                    this.data.tier2Two--;
+                    this.data.tier4Two = this.data.tier4Two + 1;
+                } else if(this.data.tier1Two > 0) {
+                    this.data.tier1Two--;
+                    this.data.tier3Two = this.data.tier3Two + 1;
+                }
+                break;
+            case 3:
+                if (this.data.tier3Three > 0) {
+                    this.data.tier3Three--;
+                    this.data.tier5Three = this.data.tier5Three + 1;
+                } else if (this.data.tier2Three > 0) {
+                    this.data.tier2Three--;
+                    this.data.tier4Three = this.data.tier4Three + 1;
+                } else if(this.data.tier1Three > 0) {
+                    this.data.tier1Three--;
+                    this.data.tier3Three = this.data.tier3Three + 1;
+                }
+                break;
+            case 4:
+                if (this.data.tier3Four > 0) {
+                    this.data.tier3Four--;
+                    this.data.tier5Four = this.data.tier5Four + 1;
+                } else if (this.data.tier2Four > 0) {
+                    this.data.tier2Four--;
+                    this.data.tier4Four = this.data.tier4Four + 1;
+                } else if(this.data.tier1Four > 0) {
+                    this.data.tier1Four--;
+                    this.data.tier3Four = this.data.tier3Four + 1;
+                }
+                break;
+            case 5:
+                if (this.data.tier3Five > 0) {
+                    this.data.tier3Five--;
+                    this.data.tier5Five = this.data.tier5Five + 1;
+                } else if (this.data.tier2Five > 0) {
+                    this.data.tier2Five--;
+                    this.data.tier4Five = this.data.tier4Five + 1;
+                } else if(this.data.tier1Five > 0) {
+                    this.data.tier1Five--;
+                    this.data.tier3Five = this.data.tier3Five + 1;
+                }
+                break;
+            default:
+                break;
         }
     }
 }
