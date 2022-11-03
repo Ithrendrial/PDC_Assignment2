@@ -58,7 +58,7 @@ public class GameDatabase {
         GameData data = new GameData();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '1'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plantID = 1");
             if (rs.next()) {
                 System.out.println("found user");
                 data.tier1One = rs.getInt("t1");
@@ -66,36 +66,50 @@ public class GameDatabase {
                 data.tier3One = rs.getInt("t3");
                 data.tier4One = rs.getInt("t4");
                 data.tier5One = rs.getInt("t5");
-
-                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '2'");
+            }
+            
+            rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plantID = 2");
+            if(rs.next()){
+                
                 data.tier1Two = rs.getInt("t1");
                 data.tier2Two = rs.getInt("t2");
                 data.tier3Two = rs.getInt("t3");
                 data.tier4Two = rs.getInt("t4");
                 data.tier5Two = rs.getInt("t5");
-
-                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '3'");
+            }
+            
+            rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plantID = 3");
+            if(rs.next()){
+                
                 data.tier1Three = rs.getInt("t1");
                 data.tier2Three = rs.getInt("t2");
                 data.tier3Three = rs.getInt("t3");
                 data.tier4Three = rs.getInt("t4");
                 data.tier5Three = rs.getInt("t5");
-
-                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '4'");
+            }
+            
+            rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plantID = 4");
+            if(rs.next()){
                 data.tier1Four = rs.getInt("t1");
                 data.tier2Four = rs.getInt("t2");
                 data.tier3Four = rs.getInt("t3");
                 data.tier4Four = rs.getInt("t4");
                 data.tier5Four = rs.getInt("t5");
-
-                rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plant_id = '5'");
+            }
+            
+            rs = statement.executeQuery("SELECT * FROM PlantsInventory WHERE username = '" + username + "' AND plantID = 5");
+            if(rs.next()){
+                
                 data.tier1Five = rs.getInt("t1");
                 data.tier2Five = rs.getInt("t2");
                 data.tier3Five = rs.getInt("t3");
                 data.tier4Five = rs.getInt("t4");
                 data.tier5Five = rs.getInt("t5");
-
-                rs = statement.executeQuery("SELECT * FROM ItemsInventory WHERE username = '" + username + "'");
+            }
+            
+            rs = statement.executeQuery("SELECT * FROM ItemsInventory WHERE username = '" + username + "'");
+            if(rs.next()){
+                
                 data.fertiliser = rs.getInt("fertiliser");
                 data.growLight = rs.getInt("growLight");
 
@@ -148,35 +162,35 @@ public class GameDatabase {
         Statement statement;
         try {
             statement = conn.createStatement();
-            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1One + "WHERE username = '" + username + "' AND plant_id = '1'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2One + "WHERE username = '" + username + "' AND plant_id = '1'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3One + "WHERE username = '" + username + "' AND plant_id = '1'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4One + "WHERE username = '" + username + "' AND plant_id = '1'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5One + "WHERE username = '" + username + "' AND plant_id = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1One + "WHERE username = '" + username + "' AND plantID = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2One + "WHERE username = '" + username + "' AND plantID = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3One + "WHERE username = '" + username + "' AND plantID = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4One + "WHERE username = '" + username + "' AND plantID = '1'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5One + "WHERE username = '" + username + "' AND plantID = '1'");
 
-            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Two + "WHERE username = '" + username + "' AND plant_id = '2'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Two + "WHERE username = '" + username + "' AND plant_id = '2'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Two + "WHERE username = '" + username + "' AND plant_id = '2'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Two + "WHERE username = '" + username + "' AND plant_id = '2'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Two + "WHERE username = '" + username + "' AND plant_id = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Two + "WHERE username = '" + username + "' AND plantID = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Two + "WHERE username = '" + username + "' AND plantID = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Two + "WHERE username = '" + username + "' AND plantID = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Two + "WHERE username = '" + username + "' AND plantID = '2'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Two + "WHERE username = '" + username + "' AND plantID = '2'");
 
-            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Three + "WHERE username = '" + username + "' AND plant_id = '3'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Three + "WHERE username = '" + username + "' AND plant_id = '3'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Three + "WHERE username = '" + username + "' AND plant_id = '3'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Three + "WHERE username = '" + username + "' AND plant_id = '3'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Three + "WHERE username = '" + username + "' AND plant_id = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Three + "WHERE username = '" + username + "' AND plantID = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Three + "WHERE username = '" + username + "' AND plantID = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Three + "WHERE username = '" + username + "' AND plantID = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Three + "WHERE username = '" + username + "' AND plantID = '3'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Three + "WHERE username = '" + username + "' AND plantID = '3'");
 
-            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Four + "WHERE username = '" + username + "' AND plant_id = '4'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Four + "WHERE username = '" + username + "' AND plant_id = '4'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Four + "WHERE username = '" + username + "' AND plant_id = '4'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Four + "WHERE username = '" + username + "' AND plant_id = '4'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Four + "WHERE username = '" + username + "' AND plant_id = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Four + "WHERE username = '" + username + "' AND plantID = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Four + "WHERE username = '" + username + "' AND plantID = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Four + "WHERE username = '" + username + "' AND plantID = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Four + "WHERE username = '" + username + "' AND plantID = '4'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Four + "WHERE username = '" + username + "' AND plantID = '4'");
 
-            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Five + "WHERE username = '" + username + "' AND plant_id = '5'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Five + "WHERE username = '" + username + "' AND plant_id = '5'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Five + "WHERE username = '" + username + "' AND plant_id = '5'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Five + "WHERE username = '" + username + "' AND plant_id = '5'");
-            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Five + "WHERE username = '" + username + "' AND plant_id = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t1 =" + t1Five + "WHERE username = '" + username + "' AND plantID = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t2 =" + t2Five + "WHERE username = '" + username + "' AND plantID = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t3 =" + t3Five + "WHERE username = '" + username + "' AND plantID = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t4 =" + t4Five + "WHERE username = '" + username + "' AND plantID = '5'");
+            statement.executeUpdate("UPDATE PlantsInventory SET t5 =" + t5Five + "WHERE username = '" + username + "' AND plantID = '5'");
 
             statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + growLight + "WHERE username = '" + username + "'");
             statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + fertiliser + "WHERE username = '" + username + "'");
@@ -213,10 +227,5 @@ public class GameDatabase {
             Logger.getLogger(GameDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
-    }
-    
-    public static void main(String[] args) {
-        GameDatabase test = new GameDatabase();
-        test.dbSetup();
     }
 }
