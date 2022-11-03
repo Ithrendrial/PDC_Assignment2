@@ -37,7 +37,7 @@ public class GameView extends JPanel implements Observer {
     private JButton select;
     private JLabel bank;
     private JLabel week;
-    private JLabel name;
+    private JLabel plantName;
     private JLabel tiers;
     private JLabel ferts;
     private JLabel lights;
@@ -103,8 +103,8 @@ public class GameView extends JPanel implements Observer {
         week.setText("Week: 00");
         week.setFont(font);
         bank.setFont(font);
-        name = new JLabel("<html><u>You have selected:</u><b> Plant Name");
-        name.setFont(font);
+        plantName = new JLabel("<html><u>You have selected:</u><b> Plant Name");
+        plantName.setFont(font);
         tiers = new JLabel("""
                            <html><br><br>You have:<br>
                            n plants in tier 1,<br> 
@@ -257,7 +257,7 @@ public class GameView extends JPanel implements Observer {
         actionButtons.add(giveLight);
         
         actions.add(info);
-        actions.add(name);
+        actions.add(plantName);
         actions.add(tiers);
         actions.add(ferts);
         actions.add(lights);
