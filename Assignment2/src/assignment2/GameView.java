@@ -417,6 +417,9 @@ public class GameView extends JPanel implements Observer {
         supplierCombobox.addItem(plant4);
         supplierCombobox.addItem(plant5);
         
+        supplierCombobox.addItem("Fertiliser");
+        supplierCombobox.addItem("Growlight");
+        
         stockCombobox.addItem(plant1);
         stockCombobox.addItem(plant2);
         stockCombobox.addItem(plant3);
@@ -431,7 +434,12 @@ public class GameView extends JPanel implements Observer {
         bank.setText("Bank: $" + Integer.toString(money));
         super.repaint();
     }
-
+    
+    //update week count in play
+    public void updateWeek(int week) {
+        //week.setText("Week: " + Integer.toString(week));
+        super.repaint();
+    }
 
     @Override
     public void update(Observable o, Object arg) {

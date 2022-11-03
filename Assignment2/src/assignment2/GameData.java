@@ -29,10 +29,10 @@ public class GameData {
     Plants plantTier = new Plants();
     
     //weekly
-    int currentWeek;
+    int currentWeek = defaultItemsNo.currentWeek;
     
     //starting money
-    int money;
+    int money = defaultItemsNo.money;
     
     //plant1 inventory entry
     String name1 = "Variegated Monstera";

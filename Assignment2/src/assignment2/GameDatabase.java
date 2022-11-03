@@ -38,7 +38,7 @@ public class GameDatabase {
             statement = conn.createStatement();
             String itemTableName = "ItemsInventory";
             if (!checkTable(itemTableName)) {
-                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12))");
+                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12)), currentWeek INT, money INT)");
             }
             statement.close();
             
@@ -112,6 +112,8 @@ public class GameDatabase {
                 
                 data.fertiliser = rs.getInt("fertiliser");
                 data.growLight = rs.getInt("growLight");
+                data.currentWeek = rs.getInt("currentWeek");
+                data.money = rs.getInt("money");
 
             } else {
                 System.out.println("User created and added to DB");
@@ -121,7 +123,7 @@ public class GameDatabase {
                 statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(3, 0, 0, 0, 0, 0, '" + username + "')");
                 statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(4, 0, 0, 0, 0, 0, '" + username + "')");
                 statement.executeUpdate("INSERT INTO PlantsInventory " + "VALUES(5, 0, 0, 0, 0, 0, '" + username + "')");
-                statement.executeUpdate("INSERT INTO ItemsInventory " + "VALUES(0, 0, '" + username + "')");
+                statement.executeUpdate("INSERT INTO ItemsInventory " + "VALUES(0, 0, '" + username + "', 0, 100)");
             }
         } catch (SQLException ex) {
             Logger.getLogger(GameDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,7 +159,7 @@ public class GameDatabase {
             int t1Three, int t2Three, int t3Three, int t4Three, int t5Three,
             int t1Four, int t2Four, int t3Four, int t4Four, int t5Four,
             int t1Five, int t2Five, int t3Five, int t4Five, int t5Five,
-            int growLight, int fertiliser,
+            int growLight, int fertiliser, int currentWeek, int money,
             String username) {
         Statement statement;
         try {
@@ -194,6 +196,8 @@ public class GameDatabase {
 
             statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + growLight + "WHERE username = '" + username + "'");
             statement.executeUpdate("UPDATE ItemsInventory SET growLight =" + fertiliser + "WHERE username = '" + username + "'");
+            statement.executeUpdate("UPDATE ItemsInventory SET currentWeek =" + fertiliser + "WHERE username = '" + username + "'");
+            statement.executeUpdate("UPDATE ItemsInventory SET money =" + money + "WHERE username = '" + username + "'");
             statement.close();
         } catch (SQLException ex) {
             System.out.println("Update not successful");

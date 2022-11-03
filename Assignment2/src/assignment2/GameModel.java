@@ -28,4 +28,17 @@ public class GameModel extends Observable {
         this.setChanged();
         this.notifyObservers(this.data);
     }
+    
+    public void buyPlant(int plantID){
+        if(plantID == 1) 
+            this.data.tier1One++;
+        else if(plantID == 2)
+            this.data.tier1Two++;
+        else if(plantID == 3)
+             this.data.tier1Three++;
+        else if(plantID == 4)
+            this.data.tier1Four++;
+        else if (plantID == 5)
+            this.data.tier1Five++;
+    }
 }
