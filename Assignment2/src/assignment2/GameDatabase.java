@@ -35,7 +35,7 @@ public class GameDatabase {
             statement = conn.createStatement();
             String itemTableName = "ItemsInventory";
             if (!checkTable(itemTableName)) {
-                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12)), currentWeek INT, money INT)");
+                statement.executeUpdate("CREATE TABLE " + itemTableName + " (growLight INT, fertiliser INT, username VARCHAR(12), currentWeek INT, money INT)");
             }
             statement.close();
             
