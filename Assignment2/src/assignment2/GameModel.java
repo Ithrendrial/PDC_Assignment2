@@ -111,6 +111,6 @@ public class GameModel extends Observable {
     }
 
     public void timePassed() {
-        
+
     }
 }

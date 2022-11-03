@@ -11,8 +11,8 @@ public class GameData {
     public GameDatabase dataBase;
 
     public GameData() {
-        dataBase = new GameDatabase();
-        dataBase.dbSetup();
+        currentWeek = 0;
+        money = 100;
     }
 
     //leader board entry
@@ -28,8 +28,14 @@ public class GameData {
     //default plantTier
     Plants plantTier = new Plants();
     
+    //weekly
+    int currentWeek = defaultItemsNo.currentWeek;
+    
+    //starting money
+    int money = defaultItemsNo.money;
+    
     //plant1 inventory entry
-    String name1 = "Monstera Deliciosa";
+    String name1 = "Variegated Monstera";
     int price1 = 500;
     int tier1One = plantTier.defaultTier;
     int tier2One = plantTier.defaultTier;

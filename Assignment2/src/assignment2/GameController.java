@@ -21,7 +21,6 @@ public class GameController implements ActionListener {
         this.view = view;
         this.frame = frame;
         this.model = model;
-
         this.view.addActionListener(this);
     }
 
@@ -31,11 +30,14 @@ public class GameController implements ActionListener {
 
         switch (command) {
             case "GO":
+                String username = this.view.enterName.getText();
+                this.model.checkName(username);
                 view.mainMenu();
                 break;
             case "PLAY":
                 view.play();
-                //model.test();
+                view.updateBank(model.data.money);
+                view.updatePlantName(model.data.name1, model.data.name2, model.data.name3, model.data.name4, model.data.name5);
                 break;
             case "mainRules":
                 origin = true;
