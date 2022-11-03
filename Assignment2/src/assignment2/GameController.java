@@ -23,8 +23,6 @@ public class GameController implements ActionListener {
         this.model = model;
 
         this.view.addActionListener(this);
-
-        this.view.addActionListener(this);
     }
 
     @Override
