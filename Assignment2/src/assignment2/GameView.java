@@ -103,7 +103,7 @@ public class GameView extends JPanel implements Observer {
         bank.setFont(font);
         week.setText("Week: ");
         week.setFont(font);
-        plantName = new JLabel("<html><u>You have selected:</u><b> Plant Name");
+        plantName = new JLabel("<html><u>You have selected:</u><b>");
         plantName.setFont(font);
         tiers = new JLabel("""
                            <html><br><br>You have:<br>
@@ -406,8 +406,8 @@ public class GameView extends JPanel implements Observer {
         howtoPlay.setActionCommand("playRules");
     }
     
-    //update plant names
-    public void updatePlantName(String plant1, String plant2, String plant3, String plant4, String plant5) {
+    //Update plant names in the Comboboxes
+    public void updatePlantNameCombo(String plant1, String plant2, String plant3, String plant4, String plant5) {
         supplierCombobox.removeAllItems();
         stockCombobox.removeAllItems();
         
@@ -428,14 +428,20 @@ public class GameView extends JPanel implements Observer {
         
         super.repaint();
     }
+    
+    //Update 
+    public void updatePlantName(String plant) {
+        plantName.setText("<html><u>You have selected: </u><b>" + plant);
+        super.repaint();
+    }
 
-    //update player money in play 
+    //Update player money in play 
     public void updateBank(int money) {
         bank.setText("Bank: $" + Integer.toString(money));
         super.repaint();
     }
     
-    //update week count in play
+    //Update week count in play
     public void updateWeek(int weekNum) {
         week.setText("Week: " + Integer.toString(weekNum));
         super.repaint();

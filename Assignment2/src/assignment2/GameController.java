@@ -37,7 +37,7 @@ public class GameController implements ActionListener {
                 view.play();
                 view.updateBank(model.data.money);
                 view.updateWeek(model.data.currentWeek);
-                view.updatePlantName(model.data.name1, model.data.name2, model.data.name3, model.data.name4, model.data.name5);
+                view.updatePlantNameCombo(model.data.name1, model.data.name2, model.data.name3, model.data.name4, model.data.name5);
                 break;
             case "mainRules":
                 origin = true;
@@ -61,7 +61,10 @@ public class GameController implements ActionListener {
             case "MAIN MENU":
                 view.mainMenu();
                 break;
-            case "SAVE":
+            case "SELECT":
+                if(){
+                    view.updatePlantName(model.data.name1);
+                }
                 break;
             default:
                 break;
