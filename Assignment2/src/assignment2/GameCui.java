@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Davis and Rachel
+ */
+
 public class GameCui {
 
     PlantAction plantAction;
@@ -67,9 +72,10 @@ public class GameCui {
             System.out.println(ANSI_GREEN + "___________________________________________________________________\n");
             System.out.println(ANSI_GREEN + "Week " + this.data.time + ":\n");
 
-            if(this.plantAction.timePassed()) {
-                System.out.println("\nCongrats! One your plants grew a leaf over the week.\n");
+            if(this.plantAction.timePassed() == true) {
+                System.out.println("\nCongrats! One your plants grew a leaf over the week.");
             }
+            
             System.out.println("You have $" + this.data.money);
 
             int value = 5;
@@ -102,28 +108,13 @@ public class GameCui {
                     case '1':
                         System.out.println("How many plants do you want to buy?");
                         try {
-                            String number = scan.next();
-
-                            try {
-                                int num = Integer.parseInt(number);
-                                success = this.plantAction.buyPlant(num);
-                                if (success) {
-                                    inventory.newWeek();
-                                }
-                            } catch (NumberFormatException e) {
-                                if (number.equals("x")) {
-                                    System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                    System.out.println("\nPrinting ledger...\n");
-                                    this.ledger.readLedger();
-                                    running = false;
-                                } 
-                                else {
-                                    System.out.println(ANSI_RED + "Invalid input, please try again.\n");
-                                }
+                            int number = scan.nextInt();
+                            success = this.plantAction.buyPlant(number);
+                            if (success) {
+                                inventory.newWeek();
                             }
-                        } 
-                        catch (InputMismatchException e) {
-                            System.out.println(ANSI_RED + "Invalid input, please try again.\n");
+                        } catch (InputMismatchException e) {
+                            System.out.println(ANSI_RED + "Invalid input, please try again.\n" + ANSI_RESET);
                         }
                         break;
 
@@ -145,55 +136,28 @@ public class GameCui {
                         System.out.println("Do you want to 1)buy or 2)use a grow light?");
 
                         try {
-                            char input = scan.next().charAt(0);
+                            int input = scan.nextInt();
 
                             switch (input) {
-                                case '1':
+                                case 1 -> {
                                     System.out.println("How many grow lights do you want to buy?");
-                                    
                                     try {
-                                        String number = scan.next();
-                                        
-                                        try {
-                                            int num = Integer.parseInt(number);
-                                            success = this.supplyAction.buyLight(num);
-                                            if (success) {
-                                                inventory.newWeek();
-                                            }
+                                        int number = scan.nextInt();
+                                        success = this.supplyAction.buyLight(number);
+                                        if (success) {
+                                            inventory.newWeek();
                                         }
-                                        catch (NumberFormatException e) {
-                                            if(number.equals("x")) {
-                                                System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                                System.out.println("\nPrinting ledger...\n");
-                                                this.ledger.readLedger();
-                                                running = false; 
-                                            }
-                                            else {
-                                              System.out.println(ANSI_RED + "Invalid input, please try again.\n");  
-                                            }
-                                        }
+                                    } catch (InputMismatchException e) {
+                                        System.out.println(ANSI_RED + "Invalid input, please try again.\n" + ANSI_RESET);
                                     }
-                                    catch (InputMismatchException e) {
-                                        System.out.println(ANSI_RED + "Invalid input, please try again.\n");
-                                    }
-                                    
-                                    break;
-
-                                case '2':
+                                }
+                                case 2 -> {
                                     success = this.supplyAction.useLight();
                                     if (success) {
                                         inventory.newWeek();
                                     }
-                                    break;
-                                    
-                                case 'x':
-                                    System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                    System.out.println("\nPrinting ledger...\n");
-                                    this.ledger.readLedger();
-                                    running = false;
-                                    break;
-                                    
-                                default:
+                                }
+                                default ->
                                     System.out.println(ANSI_RED + "Invalid input, please try again.\n" + ANSI_RESET);
                             }
                         } catch (InputMismatchException e) {
@@ -205,59 +169,32 @@ public class GameCui {
                         System.out.println("Do you want to 1)buy or 2)use fertiliser?");
 
                         try {
-                            char input = scan.next().charAt(0);
+                            int input = scan.nextInt();
 
                             switch (input) {
-                                case '1':
+                                case 1 -> {
                                     System.out.println("How many bags of fertiliser do you want to buy?");
-                                    
                                     try {
-                                        String number = scan.next();
-                                        
-                                        try {
-                                            int num = Integer.parseInt(number);
-                                            success = this.supplyAction.buyFertiliser(num);
-                                            if (success) {
-                                                inventory.newWeek();
-                                            }
+                                        int number = scan.nextInt();
+                                        success = this.supplyAction.buyFertiliser(number);
+                                        if (success) {
+                                            inventory.newWeek();
                                         }
-                                        catch (NumberFormatException e) {
-                                            if(number.equals("x")) {
-                                                System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                                System.out.println("\nPrinting ledger...\n");
-                                                this.ledger.readLedger();
-                                                running = false; 
-                                            }
-                                            else {
-                                              System.out.println(ANSI_RED + "Invalid input, please try again.\n");  
-                                            }
-                                        }
-                                    }
-                                    catch (InputMismatchException e) {
+                                    } catch (InputMismatchException e) {
                                         System.out.println(ANSI_RED + "Invalid input, please try again.\n");
                                     }
-                                    
-                                    break;
-
-                                case '2':
+                                }
+                                case 2 -> {
                                     success = this.supplyAction.useFertiliser();
                                     if (success) {
                                         inventory.newWeek();
                                     }
-                                    break;
-                                    
-                                case 'x':
-                                    System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                    System.out.println("\nPrinting ledger...\n");
-                                    this.ledger.readLedger();
-                                    running = false;
-                                    break;
-                                    
-                                default:
-                                    System.out.println(ANSI_RED + "Invalid input, please try again.\n" + ANSI_RESET);
+                                }
+                                default ->
+                                    System.out.println(ANSI_RED + "Invalid input, please try again.\n");
                             }
                         } catch (InputMismatchException e) {
-                            System.out.println(ANSI_RED + "Invalid input, please try again.\n" + ANSI_RESET);
+                            System.out.println(ANSI_RED + "Invalid input, please try again.\n");
                         }
                         break;
 
@@ -268,34 +205,19 @@ public class GameCui {
                         System.out.println("3)Reset your save");
 
                         try {
-                            char input = scan.next().charAt(0);
+                            int input = scan.nextInt();
 
                             switch (input) {
-                                case '1':
+                                case 1 -> 
                                     this.saveAction.saveGame();
-                                    break;
-                                    
-                                case '2':
+                                case 2 ->
                                     this.saveAction.loadGame();
-                                    break;
-                                    
-                                case '3':
+                                case 3 ->
                                     this.saveAction.resetSave();
-                                    break;
-                                    
-                                case 'x':
-                                    System.out.println("Thanks for playing! You finished the game with $" + this.data.money);
-                                    System.out.println("\nPrinting ledger...\n");
-                                    this.ledger.readLedger();
-                                    running = false;
-                                    break;
-
-                                default:
+                                default ->
                                     System.out.println(ANSI_RED + "Invalid input, please try again.\n");
-                                    break;
                             }
-                        } 
-                        catch (InputMismatchException e) {
+                        } catch (InputMismatchException e) {
                             System.out.println(ANSI_RED + "Invalid input, please try again.\n");
                         }
                         break;

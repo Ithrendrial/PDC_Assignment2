@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Davis Pike (Pb - fixed)
+ * @author Davis Pike
  */
 public class GameDatabase {
 
@@ -22,9 +22,6 @@ public class GameDatabase {
     String user_name = "pdc";
     String password = "pdc";
 
-    //1.removed redundant code
-    //2.in statement.executeUpdate(); missing bracket was added
-    //3.rearranged the entire database structure please have a read through (database only use to save non-static data, eg: player save data, eg for not good in database: plant price)
     public void dbSetup() {
         try {
             conn = DriverManager.getConnection(url, user_name, password);

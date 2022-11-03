@@ -1,5 +1,6 @@
 package assignment2;
 
+import static assignment2.PlantAction.ANSI_RED;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -8,27 +9,29 @@ import javax.swing.JFrame;
  *
  * @author rcox299
  */
-public class GameController implements ActionListener{
+public class GameController implements ActionListener {
+
     public GameView view;
     public GameModel model;
     private JFrame frame;
     private boolean origin;
-    
-        public GameController(GameView view, GameModel model, JFrame frame){
+    Inventory userInventory;
+
+    public GameController(GameView view, GameModel model, JFrame frame) {
         this.view = view;
         this.frame = frame;
         this.model = model;
-        
+
         this.view.addActionListener(this);
-        
+
         this.view.addActionListener(this);
     }
-        
+
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        
-        switch(command){
+
+        switch (command) {
             case "GO":
                 view.mainMenu();
                 break;
@@ -44,10 +47,11 @@ public class GameController implements ActionListener{
                 view.leaderboard();
                 break;
             case "BACK":
-                if (origin)
+                if (origin) {
                     view.mainMenu();
-                else
+                } else {
                     view.play();
+                }
                 break;
             case "playRules":
                 origin = false;
@@ -61,6 +65,6 @@ public class GameController implements ActionListener{
             default:
                 break;
         }
-        
+
     }
 }
