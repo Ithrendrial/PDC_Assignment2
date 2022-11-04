@@ -1,9 +1,8 @@
 package assignment2;
 
 import java.util.Observable;
-import java.util.Random;
 
-public class GameModel extends Observable {
+public class GameModel extends Observable{
 
     public GameDatabase db;
     public GameData data;
@@ -602,5 +601,17 @@ public class GameModel extends Observable {
             default:
                 return 1;
         }
+    }
+    
+    public String[] getPreviousScores() {
+        String[] scoresArray = {"","","","","","","","","","","","","","","","","","","",""};
+        this.db.leaderBoard(this.data);
+        
+        for(int i = 0; i < data.score.size(); i = i + 2){
+            scoresArray[i + 1] = String.valueOf(data.score.get(i));
+            scoresArray[i] = data.name.get(i);
+        }
+        
+        return scoresArray;
     }
 }

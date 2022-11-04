@@ -92,7 +92,7 @@ public class GameView extends JPanel implements Observer {
         //Instantiate Main Menu 
         play = new JButton("PLAY");
         howtoMain = new JButton("HOW TO PLAY");
-        leaderboard = new JButton("LEADERBOARD");
+        leaderboard = new JButton("PREVIOUS GAMES");
         
         background = new JLabel();
 
@@ -384,7 +384,7 @@ public class GameView extends JPanel implements Observer {
         scoresList.setOpaque(true);
         scoresList.setFont(font);
         scoresList.setText("""
-                           <html><b><center><u>LEADERBOARD</u></center><br><br>
+                           <html><b><center><u>10 Previous Games</u></center><br><br>
                            1. Person 1, score<br><br>
                            2. Person 2, score<br><br>
                            3. Person 3, score<br><br>
@@ -540,13 +540,6 @@ public class GameView extends JPanel implements Observer {
         warning.setForeground(Color.decode("#c30000"));
         super.repaint();
     }
-        
-    //Plant Grows a Leaf
-    public void newLeaf(String plant) {
-        warning.setText(plantName + " plant grew a new leaf!");
-        warning.setForeground(Color.decode("#005d1d"));
-        super.repaint();
-    }
     
     //Update plant name when selected
     public void updatePlantName(String plant) {
@@ -582,6 +575,23 @@ public class GameView extends JPanel implements Observer {
     //Update week count in play
     public void updateWeek(int weekNum) {
         week.setText("Week: " + Integer.toString(weekNum));
+        super.repaint();
+    }
+    
+    //Previous Games Display
+    public void displayScores(String[] scores) {
+        
+        scoresList.setText("<html><b><center><u>Ten Most Recent Games</u></center><br><br>"
+                   + "1. " + scores[0] + "<br><br>"
+                   + "2. " + scores[1] + "<br><br>"
+                   + "3. " + scores[2] + "<br><br>"
+                   + "4. " + scores[3] + "<br><br>"
+                   + "5. " + scores[4] + "<br><br>"
+                   + "6. " + scores[5] + "<br><br>"
+                   + "7. " + scores[6] + "<br><br>"
+                   + "8. " + scores[7] + "<br><br>"
+                   + "9. " + scores[8] + "<br><br>"
+                   + "10. " + scores[9] + "<br></html>");
         super.repaint();
     }
     

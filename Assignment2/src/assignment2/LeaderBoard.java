@@ -1,5 +1,6 @@
 package assignment2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderBoard 
@@ -9,6 +10,7 @@ public class LeaderBoard
     
     public LeaderBoard()
     {
-
+        this.score = new ArrayList<>();
+        this.name = new ArrayList<>();
     }
 }
